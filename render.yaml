@@ -1,0 +1,52 @@
+services:
+  # Servicio Backend (Reflex)
+  - type: web
+    name: reflex-backend
+    env: docker
+    dockerfilePath: ./Dockerfile  # Asegúrate de que esta ruta es relativa a la raíz de tu repositorio
+    dockerContext: .
+    healthCheckPath: /healthz  # Ajusta según la ruta de verificación de salud de tu aplicación
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: reflex-redis
+          property: connectionString
+      - key: RENDER_EXTERNAL_URL
+        fromService:
+          type: web
+          name: reflex-backend
+          property: url
+      - key: PYTHONUNBUFFERED
+        value: "true"
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+
+  # Servicio Frontend (Reflex web)
+  - type: web
+    name: reflex-frontend
+    env: docker
+    dockerfilePath: ./web.Dockerfile  # Asegúrate de que esta ruta es relativa a la raíz
+    dockerContext: .
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: reflex-backend
+          property: url
+
+  # Servicio Redis
+  - type: redis
+    name: reflex-redis
+    ipAllowList: 
+      - source: 0.0.0.0/0  # Permite todas las IPs - ajusta esto por seguridad en producción
+    plan: free  # Cambia a un plan de pago si necesitas más recursos
+
+# Definición de un grupo de despliegue para sincronizar los servicios
+databases:
+  - name: reflex-redis
+    databaseName: redis
+    user: redis
