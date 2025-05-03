@@ -21,10 +21,6 @@ services:
           property: host
       - key: PYTHONUNBUFFERED
         value: "true"
-    autoscaling:
-      minInstances: 1
-      maxInstances: 2
-      targetCPUPercent: 70
 
   # Servicio Frontend (Reflex web)
   - type: web
