@@ -18,12 +18,13 @@ services:
         fromService:
           type: web
           name: reflex-backend
-          property: url
+          property: host
       - key: PYTHONUNBUFFERED
         value: "true"
-    scaling:
+    autoscaling:
       minInstances: 1
-      maxInstances: 1
+      maxInstances: 2
+      targetCPUPercent: 70
 
   # Servicio Frontend (Reflex web)
   - type: web
@@ -36,7 +37,7 @@ services:
         fromService:
           type: web
           name: reflex-backend
-          property: url
+          property: host
 
   # Servicio Redis
   - type: redis
@@ -44,9 +45,3 @@ services:
     ipAllowList: 
       - source: 0.0.0.0/0  # Permite todas las IPs - ajusta esto por seguridad en producción
     plan: free  # Cambia a un plan de pago si necesitas más recursos
-
-# Definición de un grupo de despliegue para sincronizar los servicios
-databases:
-  - name: reflex-redis
-    databaseName: redis
-    user: redis
