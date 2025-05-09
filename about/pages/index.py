@@ -1,13 +1,9 @@
 import reflex as rx
-from about.components.navbar import navbar
+from about.components.layout import layout
 from about.components.hero import hero
-from about.components.footer import footer
 
-@rx.page(route="/", title="morabdiego | About") # Agregar preview
+@rx.page("/", title="Diego Mora")
 def index() -> rx.Component:
-    return rx.box(
-        navbar(),
+    return layout(
         hero(),
-        footer(),
-        width="100%"
     )

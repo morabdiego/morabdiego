@@ -1,4 +1,4 @@
-.PHONY: build run clean frontend
+.PHONY: build run clean static
 
 build:
 	python -m venv .venv
@@ -7,12 +7,13 @@ build:
 run:
 	. .venv/bin/activate && reflex run
 
-frontend: build
+static: build
 	. .venv/bin/activate && reflex export --frontend-only
 	rm -rf public/
 	mkdir -p public/
 	unzip -o frontend.zip -d public/
 	rm frontend.zip
+	echo "Static site generated in the public/ directory"
 
 clean:
 	rm -rf .venv/

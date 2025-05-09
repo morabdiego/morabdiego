@@ -1,5 +1,5 @@
 import reflex as rx
-from about.styles.styles import Size, AltTextColor  # Import ACCENT color
+from about.styles import Size, AltTextColor  # Import ACCENT color
 from about.constants import SOCIAL_LINKS, MAX_WIDTH
 
 def profile_image() -> rx.Component:

@@ -1,5 +1,5 @@
 import reflex as rx
-from about.styles.styles import AltTextColor, Size
+from about.styles import AltTextColor, Size
 
 def heading(level: str, children) -> rx.Component:
     return rx.heading(
@@ -7,9 +7,9 @@ def heading(level: str, children) -> rx.Component:
         as_=level,
         color=AltTextColor.PRIMARY.value if level != "h1" else AltTextColor.UNEXPECTED.value,
         font_size=Size.VERY_BIG.value if level == "h1" else 
-                 Size.BIG.value if level == "h2" else 
-                 Size.MEDIUM.value if level == "h3" else 
-                 Size.DEFAULT.value,  # h4 size
+                    Size.BIG.value if level == "h2" else 
+                    Size.MEDIUM.value if level == "h3" else 
+                    Size.DEFAULT.value,  # h4 size
         font_weight="normal" if level == "h4" else "bold",  # h4 not bold
         font_style="italic" if level == "h4" else "normal",  # h4 italic
         margin_bottom="1em" if level == "h1" else "0.8em",

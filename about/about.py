@@ -1,8 +1,6 @@
 import reflex as rx
-from about.pages.index import index
-from about.pages.publications import publications
-from about.api.api import hello
-from about.styles.styles import STYLESHEETS
+from about.pages import index, publications
+from about.styles import STYLESHEETS
 
 app = rx.App()
 
@@ -17,5 +15,3 @@ app.global_style = {
         "padding": 0,
     }
 }
-
-app.api.add_api_route("/hello", hello) # Add an API route test
