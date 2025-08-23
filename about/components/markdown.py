@@ -5,10 +5,10 @@ def heading(level: str, children) -> rx.Component:
     return rx.heading(
         children,
         as_=level,
-        color=AltTextColor.PRIMARY.value if level != "h1" else AltTextColor.UNEXPECTED.value,
-        font_size=Size.VERY_BIG.value if level == "h1" else 
-                    Size.BIG.value if level == "h2" else 
-                    Size.MEDIUM.value if level == "h3" else 
+        color=AltTextColor.UNEXPECTED.value if level in ["h1", "h2"] else AltTextColor.PRIMARY.value,
+        font_size=Size.VERY_BIG.value if level == "h1" else
+                    Size.BIG.value if level == "h2" else
+                    Size.MEDIUM.value if level == "h3" else
                     Size.DEFAULT.value,  # h4 size
         font_weight="normal" if level == "h4" else "bold",  # h4 not bold
         font_style="italic" if level == "h4" else "normal",  # h4 italic

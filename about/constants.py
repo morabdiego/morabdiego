@@ -6,7 +6,7 @@ GITHUB_URL = "https://github.com/morabdiego"
 LINKEDIN_URL = "https://www.linkedin.com/in/morabdiego/"
 GMAIL_URL = "morabdiego@gmail.com"
 INSTAGRAM_URL = "https://www.instagram.com/morabdiego/"
-CV_URL = "https://drive.google.com/file/d/1h1djoliw5Gp4R2rFO0Ex4H8-WqHjdst-/view?usp=sharing"  # Spanish CV URL
+CV_URL = "https://drive.google.com/file/d/1M2RWi5Jx67YRV9VEv1o-AQCqtPSNN6t6/view?usp=sharing"  # Spanish CV URL
 
 
 # Social Links with icons and descriptions
