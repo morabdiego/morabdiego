@@ -1,16 +1,18 @@
+<p align="center">
+  <b>Economist (UBA) · Fiscal Policy & Data Analyst · Socioeconomic Researcher</b>
+</p>
+
 <h1 align="center">
   <a href="https://github.com/morabdiego">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.herokuapp.com?font=Montserrat&weight=700&size=50&pause=1000&color=FFFFFF&center=true&vCenter=true&random=false&width=600&lines=Diego+Mora">
-      <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.herokuapp.com?font=Montserrat&weight=700&size=50&pause=1000&color=000000&center=true&vCenter=true&random=false&width=600&lines=Diego+Mora">
-      <img src="https://readme-typing-svg.herokuapp.com?font=Montserrat&weight=700&size=50&pause=1000&color=000000&center=true&vCenter=true&random=false&width=600&lines=Diego+Mora" alt="Diego Mora" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.herokuapp.com?font=Montserrat&weight=700&size=50&pause=1000&color=FFFFFF&center=true&vCenter=true&random=false&width=600&lines=Diego+J.+Mora+Benitez">
+      <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.herokuapp.com?font=Montserrat&weight=700&size=50&pause=1000&color=000000&center=true&vCenter=true&random=false&width=600&lines=Diego+J.+Mora+Benitez">
+      <img src="https://readme-typing-svg.herokuapp.com?font=Montserrat&weight=700&size=50&pause=1000&color=000000&center=true&vCenter=true&random=false&width=600&lines=Diego+J.+Mora+Benitez" alt="Diego Mora" />
     </picture>
   </a>
 </h1>
 
-<p align="center">
-  <b>Economist (UBA) · Fiscal Policy & Data Analyst · Socioeconomic Researcher</b>
-</p>
+
 
 <p align="center">
   <a href="https://morabdiego.github.io/morabdiego/" target="_blank">
