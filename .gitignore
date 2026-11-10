@@ -1,9 +1,10 @@
 assets/external/
-.web
-*.py[cod]
-*.db
-.states
 __pycache__/
+*.db
+.web
+.states
 .venv/
+*.py[cod]
 .env
-.web/
+frontend.zip
+dist/

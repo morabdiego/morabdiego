@@ -1,37 +1,16 @@
-## Publicaciones
+# Proyectos, Investigaciones y Publicaciones
 
-### Herramientas de código abierto
+## Ciencia Abierta y Bases de Datos
+- **Observadata**: Repositorio público de datos abiertos del Observatorio Villero de La Poderosa (microdatos anonimizados, metadatos bajo estándares FAIR y DOI en Zenodo). [→ GitHub](https://github.com/ObservatorioVillero/observadata) · [→ Ver en Observatorio](https://observatoriovillero.lapoderosa.org.ar/proyecto/10)
 
-- Paquete pyBCRAdata: Cliente Python para acceder a estadísticas monetarias, datos de tipo de cambio e información de deudores publicados por el Banco Central de la República Argentina (BCRA). Publicado en PyPI (Python Package Index) https://pypi.org/project/pyBCRAdata/. [→ Ver](https://github.com/morabdiego/pyBCRA).
-- Paquete kobo2pandas: Un paquete de python para acceder a la API de KoboToolbox y transformar las respuestas de las encuestas directamente a dataframes, recursivamente. Publicado en PyPI (Python Package Index) https://pypi.org/project/kobo2pandas/. [→ Ver](https://github.com/morabdiego/kobo2pandas).
+## Relevamientos e Investigaciones Federales
+- **Endeudamiento en barrios populares: circuitos informales y costos no monetarios** (2026). Observatorio Villero (La Poderosa) & Fundación Friedrich Ebert (FES). Muestreo por cuotas a 643 personas en 12 barrios de 7 provincias. [→ Informe PDF](https://observatoriovillero.lapoderosa.org.ar/media/encuesta-endeudamiento-2026-v5.pdf) · [→ Proyecto](https://observatoriovillero.lapoderosa.org.ar/proyecto/11)
+- **Encuesta de Uso del Tiempo en Barrios Populares: medición del Trabajo Comunitario de Cuidados** (2025–2026). Observatorio Villero (La Poderosa) & SAGE Foundation. 1.096 hogares y 1.241 personas en 71 barrios de 14 provincias. [→ Informe PDF](https://observatoriovillero.lapoderosa.org.ar/media/EUT-TCC._Resultados_finales_2026.pdf) · [→ Base de datos](https://github.com/ObservatorioVillero/observadata/tree/main/encuesta-uso-del-tiempo/2025) · [→ Proyecto](https://observatoriovillero.lapoderosa.org.ar/proyecto/9)
+- **Condiciones de vida en barrios populares** (2024–2025). Observatorio Villero (La Poderosa), ACIJ, IIGG-UBA & Fundación TEMAS. 1.485 hogares y 5.024 personas en 9 barrios de 6 provincias. [→ Informe PDF](https://observatoriovillero.lapoderosa.org.ar/media/observatorio-villero_condiciones_de_vida_2024.pdf) · [→ Web interactiva](https://lapoderosa.acij.org.ar/) · [→ Base de datos](https://github.com/ObservatorioVillero/observadata/tree/main/condiciones-de-vida/2024)
+- **La situación de la pobreza en los barrios populares: Estudio cualitativo** (2023). Dávolos, P. — UNICEF Argentina & Observatorio Villero (La Poderosa). [→ Informe PDF](https://observatoriovillero.lapoderosa.org.ar/media/Estudio_cualitativo__la_situaci%C3%B3n_de_la_pobreza_en_barrios_populares.pdf) · [→ Proyecto](https://observatoriovillero.lapoderosa.org.ar/proyecto/7)
+- **Condiciones habitacionales y servicios públicos en barrios populares** (2022). Observatorio Villero (La Poderosa), Fundación Rosa Luxemburgo & El Gato y La Caja. 1.222 viviendas en 23 barrios de 16 provincias. [→ Web interactiva](https://lapoderosa.elgatoylacaja.com/) · [→ Proyecto](https://observatoriovillero.lapoderosa.org.ar/proyecto/6)
+- **Relevamiento Nacional de Gestión Menstrual en Barrios Populares** (2021). Observatorio Villero (La Poderosa). 2.478 hogares y 3.598 personas menstruantes en 67 barrios de 22 provincias. [→ Proyecto](https://observatoriovillero.lapoderosa.org.ar/proyecto/1)
 
-### Artículos
-
-- Cappa, A., Cejas Marcovecchio, M., Miño, L., & Mora, D. (2025). *Desafíos y avances en la urbanización de barrios populares*. [FES](https://argentina.fes.de), [OCEPP](https://ocepp.com/) y Observatorio Villero. [→ Ver](https://library.fes.de/pdf-files/bueros/argentinien/21968.pdf)
-
-- Mora Benitez, D. (2023). *Relevamiento de condiciones habitacionales en barrios populares: El rol del Observatorio Villero de La Poderosa en la producción de estadísticas comunitarias*. Revista Idelcoop, 239, 128-140. [→ Ver](https://www.idelcoop.org.ar/sites/www.idelcoop.org.ar/files/revista/articulos/pdf/experiencias_1_1.pdf)
-
-- Mora Benitez, D. (2023). Mora Benitez, D. (2023). *Pobreza multidimensional en la Ciudad de Buenos Aires en el año 2021* [Tesina de grado, Universidad de Buenos Aires].[→ Ver](https://drive.google.com/file/d/1B4QVZ40DdklelukZKRqxSlr1uS4QwNLg/view)
-
-- Bercovich, F., Mora D. (en preparación). *Condiciones habitacionales en barrios populares 2024*. Asociación Civil por la Igualdad y la Justicia (ACIJ) & Observatorio Villero.
-
-### Colaboración
-
-- Dávolos, P. (2023). *La situación de pobreza en los barrios populares: Estudio cualitativo*. La Poderosa y UNICEF. [→ Ver](https://www.unicef.org/argentina/media/17071/file/Estudio%20cualitativo:%20la%20situaci%C3%B3n%20de%20la%20pobreza%20en%20barrios%20populares.pdf)
-
-- Asociación Civil por la Igualdad y la Justicia (ACIJ), Observatorio Villero & Fundación TEMAS (2025). *Derecho al agua y saneamiento en Villa 21-24-Zavaleta: una deuda histórica y urgente.*
-[→ Ver](https://acij.org.ar/wp-content/uploads/2025/04/Derecho-al-agua-y-saneamiento-en-Villa-2124-Zavaleta.pdf)
-
-### Presentaciones en simposios y congresos
-
-#### Expositor
-
-- Mora Benitez, D. (2023, 27 de octubre). *Métodos de medición de la pobreza: La Canasta Villera* [Conferencia]. Facultad de Trabajo Social, Universidad Nacional de Entre Ríos, Argentina.
-
-#### Moderador
-
-- (2024, 7 de diciembre). *Conversatorio de Economía y Trabajo Cooperativo*. 3er Encuentro Nacional de Cooperativas de La Poderosa. Cabildo de la Ciudad de Córdoba, Córdoba, Argentina.
-
-#### Organizador
-
-- (2025, 21 de abril). *Barrios populares: Crónica de una política desfinanciada*. Presentación del informe "Desafíos y avances en la urbanización de barrios populares". Congreso de la Nación Argentina, Ciudad de Buenos Aires, Argentina.
+## Publicaciones y Artículos
+- Cappa, A., Cejas Marcovecchio, M., Miño, L., & Mora Benitez, D. (2025). *Avances y desafíos en la urbanización de barrios populares: Políticas públicas para una transformación real (2021–2023)*. FES, OCEPP & Observatorio Villero. [→ Publicación FES](https://collections.fes.de/publikationen/ident/fes/21968) · [→ Nota](https://observatoriovillero.lapoderosa.org.ar/informes/7)
+- Mora Benitez, D. (2023). *Relevamiento de condiciones habitacionales en barrios populares: El rol del Observatorio Villero de La Poderosa en la producción de estadísticas comunitarias*. Revista Idelcoop, 239, 128–140. [→ Artículo PDF](https://observatoriovillero.lapoderosa.org.ar/media/ObservatorioVillero-IDELCOOP.pdf) · [→ Nota](https://observatoriovillero.lapoderosa.org.ar/informes/8)

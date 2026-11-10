@@ -1,0 +1,9 @@
+[project]
+name = "about"
+version = "0.2.0"
+description = "One-Page Portfolio & CV de Diego J. Mora Benitez (@morabdiego) realizado con Reflex"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "reflex>=0.10.1",
+]

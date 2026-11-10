@@ -8,72 +8,37 @@
   </a>
 </h1>
 
-###
-
-<p align="left">
-• Economist and Data Analyst focused on socio-economic research projects
-
-• Design and management of survey research projects
-
-• Skills in data processing, visualization, and statistical analysis
-
-• Economics graduate from University of Buenos Aires
-
-• Currently expanding skills in:
-  - SQL and Python
-  - API development
-  - Web applications with Python frameworks
-
-• Creator of <a href="https://pypi.org/project/pybcradata/" target="_blank">pyBCRAdata</a>, a Python library for accessing Central Bank of Argentina data
+<p align="center">
+  <b>Economist (UBA) · Fiscal Policy & Data Analyst · Socioeconomic Researcher</b>
 </p>
 
+<p align="center">
+  <a href="https://morabdiego.github.io/morabdiego/" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Portfolio%20%26%20Interactive%20CV%20(ES%20/%20EN)&logo=githubpages&label=&color=1B4332&logoColor=white&style=for-the-badge" height="35" alt="Portfolio & CV" />
+  </a>
+</p>
+
+<br />
+
+- **Economist & Data Analyst** specialized in applied econometrics, tax analytics, and nationwide socioeconomic research (B.A. in Economics, **UBA** · Diploma in Public Sector Data Analysis, **IPAP–UTN**).
+- **Economic Advisor at ARBA** *(Buenos Aires Province Tax Agency)*: subnational revenue forecasting (*SARIMAX*, cointegration), fiscal intelligence algorithms, large-scale ETL pipelines, and policy impact evaluation (*Difference-in-Differences*).
+- **Socioeconomic Research Coordinator & Data Lead at [Observatorio Villero](https://observatoriovillero.lapoderosa.org.ar/)**: complex sampling design, nationwide household surveys, automated field data auditing (*KoboToolbox REST API & Telegram bots*), and data storytelling.
+
+<br />
+
+## Open-Source Packages & Datasets
+
+| Project | Description | Package / Source |
+| :--- | :--- | :--- |
+| **[pyindec](https://github.com/morabdiego/pyindec)** | Python client for Argentina's National Statistics Institute (**INDEC**) PostgREST API with fluent `QueryBuilder`, column normalization, and automatic composite-key pagination across 19 official endpoints (*IPC, EMAE, EPH, Canastas, Comex, etc.*). | [![PyPI](https://img.shields.io/pypi/v/pyindec?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/pyindec/) |
+| **[pyBCRAdata](https://github.com/morabdiego/pybcradata)** | Python library for fetching monetary, exchange rate, and financial time series from the Central Bank of Argentina (**BCRA**) API. | [![PyPI](https://img.shields.io/pypi/v/pybcradata?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/pybcradata/) |
+| **[xlsform-to-registro](https://github.com/morabdiego/xlsform-to-registro)** | CLI & Python library that converts standard **XLSForm** surveys (*KoboToolbox, ODK, Enketo*) into publication-ready institutional Excel Data Dictionaries (*Diseños de Registro*), translating `relevant` skip logic into target universes and extracting large catalogues. | [![PyPI](https://img.shields.io/pypi/v/xlsform-to-registro?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/xlsform-to-registro/) |
+| **[kobo-api-v2](https://github.com/morabdiego/kobo-api-v2)** | Lightweight synchronous Python client for the **KoboToolbox API v2** featuring one-call Excel/CSV exports, reusable export settings, and automated polling. | [![PyPI](https://img.shields.io/pypi/v/kobo-api-v2?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/kobo-api-v2/) |
+| **[Observadata](https://github.com/ObservatorioVillero/observadata)** | Open-science repository of anonymized socioeconomic microdata and FAIR-standard metadata backed by Zenodo DOIs. | [![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?logo=github&logoColor=white)](https://github.com/ObservatorioVillero/observadata) |
+
 ```bash
-pip install pybcradata
-```
+# Macroeconomic & Official Statistics APIs (Argentina)
+pip install pyindec pybcradata
 
-###
-
-<h2 align="left">Skills</h2>
-
-
-###
-
-<div align="left">
-  <a href="https://www.python.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="30" alt="python logo"  /></a>
-  <img width="12" />
-  <a href="https://jupyter.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" height="30" alt="jupyter logo"  /></a>
-  <img width="12" />
-  <a href="https://pandas.pydata.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" height="30" alt="pandas logo"  /></a>
-  <img width="12" />
-  <a href="https://git-scm.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="30" alt="git logo"  /></a>
-  <img width="12" />
-  <a href="https://github.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="30" alt="github logo"  /></a>
-  <img width="12" />
-  <a href="https://www.r-project.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" height="30" alt="r logo"  /></a>
-  <img width="12" />
-  <a href="https://www.rstudio.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rstudio/rstudio-original.svg" height="30" alt="rstudio logo"  /></a>
-  <img width="12" />
-  <a href="https://www.markdownguide.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg" height="30" alt="markdown logo"  /></a>
-  <img width="12" />
-  <a href="https://code.visualstudio.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="30" alt="vscode logo"  /></a>
-  <img width="12" />
-  <a href="https://www.postgresql.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="30" alt="postgresql logo"  /></a>
-  <img width="12" />
-  <a href="https://www.mysql.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="30" alt="mysql logo"  /></a>
-</div>
-
-###
-
-<h2 align="left">Contact</h2>
-
-
-###
-
-<div align="left">
-  <a href="https://instagram.com/morabdiego" target="_blank"><img src="https://img.shields.io/static/v1?message=Instagram&logo=instagram&label=&color=E4405F&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="instagram logo"  /></a>
-  <a href="mailto:morabdiego@gmail.com" target="_blank"><img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo"  /></a>
-  <a href="https://linkedin.com/in/morabdiego" target="_blank"><img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo"  /></a>
-  <a href="https://wa.me/5491122504637" target="_blank"><img src="https://camo.githubusercontent.com/0ee66c3a88fcdfaad7c6fb00fc9d7be6af4feeac326d1a138de0da372c6b07d3/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f6d6573736167653d5768617473617070266c6f676f3d7768617473617070266c6162656c3d26636f6c6f723d323544333636266c6f676f436f6c6f723d7768697465266c6162656c436f6c6f723d267374796c653d666f722d7468652d6261646765" height="35" alt="whatsapp logo"  /></a>
-</div>
-
-###
+# Survey Engineering & KoboToolbox Workflows
+pip install xlsform-to-registro kobo-api-v2

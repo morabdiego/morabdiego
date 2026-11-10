@@ -1,23 +1,14 @@
-.PHONY: build run clean static
+.PHONY: install run export clean
 
-build:
-	python -m venv .venv
-	. .venv/bin/activate && pip install -r requirements.txt
+install:
+	uv sync
 
 run:
-	. .venv/bin/activate && reflex run
+	uv run reflex run --frontend-only
 
-static: build
-	. .venv/bin/activate && reflex export --frontend-only
-	rm -rf public/
-	mkdir -p public/
-	unzip -o frontend.zip -d public/
-	rm frontend.zip
-	echo "Static site generated in the public/ directory"
+export:
+	uv run reflex export --frontend-only --no-zip
 
 clean:
-	rm -rf .venv/
-	rm -rf .states/
-	rm -rf .web/
-	rm -rf public/
+	rm -rf .states/ .web/ frontend.zip
 	find . -name "__pycache__" -type d -exec rm -rf {} +

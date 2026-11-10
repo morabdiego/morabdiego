@@ -1,0 +1,953 @@
+import reflex as rx
+from about.styles.styles import (
+    Color,
+    AltColor,
+    AltTextColor,
+    Font,
+    CARD_STYLE,
+)
+from about.constants import MAX_WIDTH
+from about.data import EXPERIENCE, EDUCATION, TRAINING, SKILLS, PUBLICATIONS
+from about.state import t
+
+
+def section_heading(
+    kicker_es: str,
+    kicker_en: str,
+    title_es: str,
+    title_en: str,
+    subtitle_es: str = "",
+    subtitle_en: str = "",
+) -> rx.Component:
+    return rx.vstack(
+        rx.text(
+            t(kicker_es, kicker_en),
+            font_family=Font.BODY.value,
+            font_size="0.76rem",
+            font_weight="700",
+            text_transform="uppercase",
+            letter_spacing="0.12em",
+            color=AltTextColor.UNEXPECTED.value,
+        ),
+        rx.heading(
+            t(title_es, title_en),
+            as_="h2",
+            font_family=Font.HEADING.value,
+            font_size=["1.75rem", "2.15rem", "2.4rem"],
+            font_weight="800",
+            color=AltTextColor.PRIMARY.value,
+            line_height="1.15",
+            letter_spacing="-0.03em",
+        ),
+        rx.cond(
+            subtitle_es != "",
+            rx.text(
+                t(subtitle_es, subtitle_en),
+                font_family=Font.BODY.value,
+                font_size="0.96rem",
+                font_weight="500",
+                color=AltTextColor.MUTED.value,
+                max_width="720px",
+                line_height="1.65",
+            ),
+        ),
+        rx.box(
+            width="60px",
+            height="4px",
+            background=Color.ACCENT.value,
+            border_radius="999px",
+            margin_top="0.35rem",
+        ),
+        spacing="2",
+        align="start",
+        width="100%",
+        margin_bottom="2rem",
+    )
+
+
+def tag_pill(label_es: str, label_en: str = "", variant: str = "green") -> rx.Component:
+    bg = (
+        AltColor.ACCENT_SOFT.value
+        if variant == "green"
+        else AltColor.HIGHLIGHT_SOFT.value
+    )
+    fg = (
+        AltTextColor.SECONDARY.value
+        if variant == "green"
+        else AltTextColor.UNEXPECTED.value
+    )
+    border_col = (
+        "rgba(43, 122, 88, 0.22)"
+        if variant == "green"
+        else "rgba(155, 77, 77, 0.22)"
+    )
+    text_content = t(label_es, label_en) if label_en else label_es
+    return rx.box(
+        rx.text(
+            text_content,
+            font_family=Font.BODY.value,
+            font_size="0.76rem",
+            font_weight="600",
+            color=fg,
+        ),
+        style={
+            "display": "inline-flex",
+            "align_items": "center",
+            "padding": "0.32rem 0.8rem",
+            "border_radius": "999px",
+            "background": bg,
+            "border": f"1px solid {border_col}",
+        },
+    )
+
+
+def bullet_row(es_text: str, en_text: str) -> rx.Component:
+    return rx.hstack(
+        rx.box(
+            width="7px",
+            height="7px",
+            border_radius="50%",
+            background=Color.ACCENT.value,
+            margin_top="0.55rem",
+            flex_shrink="0",
+        ),
+        rx.text(
+            t(es_text, en_text),
+            font_family=Font.BODY.value,
+            font_size="0.94rem",
+            font_weight="400",
+            color=AltTextColor.PRIMARY.value,
+            line_height="1.65",
+        ),
+        spacing="3",
+        align="start",
+        width="100%",
+    )
+
+
+def experience_card(item: dict) -> rx.Component:
+    bullets = list(zip(item["bullets_es"], item["bullets_en"]))
+    tags = list(zip(item["tags_es"], item["tags_en"]))
+    card_css = {
+        **CARD_STYLE,
+        "border_left": (
+            f"4px solid {Color.ACCENT.value}"
+            if item["current"]
+            else f"4px solid {AltColor.BORDER_STRONG.value}"
+        ),
+    }
+    return rx.box(
+        rx.vstack(
+            # Header row: Icon + Role + Organization + Period badge
+            rx.flex(
+                rx.hstack(
+                    rx.box(
+                        rx.icon(
+                            item["icon"],
+                            size=22,
+                            color=AltTextColor.SECONDARY.value,
+                        ),
+                        style={
+                            "display": "inline-flex",
+                            "align_items": "center",
+                            "justify_content": "center",
+                            "width": "46px",
+                            "height": "46px",
+                            "border_radius": "12px",
+                            "background": AltColor.ACCENT_SOFT.value,
+                            "flex_shrink": "0",
+                        },
+                    ),
+                    rx.vstack(
+                        rx.flex(
+                            rx.heading(
+                                t(item["role_es"], item["role_en"]),
+                                as_="h3",
+                                font_family=Font.HEADING.value,
+                                font_size=["1.12rem", "1.25rem"],
+                                font_weight="700",
+                                color=AltTextColor.PRIMARY.value,
+                                letter_spacing="-0.02em",
+                            ),
+                            rx.cond(
+                                item["current"],
+                                rx.box(
+                                    rx.text(
+                                        t("ACTUAL", "CURRENT"),
+                                        font_family=Font.BODY.value,
+                                        font_size="0.68rem",
+                                        font_weight="800",
+                                        letter_spacing="0.06em",
+                                        color=Color.BACKGROUND_DEEP.value,
+                                    ),
+                                    style={
+                                        "display": "inline-flex",
+                                        "align_items": "center",
+                                        "padding": "0.2rem 0.65rem",
+                                        "border_radius": "999px",
+                                        "background": Color.ACCENT.value,
+                                    },
+                                ),
+                            ),
+                            spacing="3",
+                            align="center",
+                            wrap="wrap",
+                            style={"gap": "0.65rem"},
+                        ),
+                        rx.flex(
+                            rx.text(
+                                t(item["organization_es"], item["organization_en"]),
+                                font_family=Font.BODY.value,
+                                font_weight="700",
+                                font_size="0.92rem",
+                                color=AltTextColor.UNEXPECTED.value,
+                            ),
+                            rx.text("·", color=AltTextColor.MUTED.value),
+                            rx.text(
+                                t(item["location_es"], item["location_en"]),
+                                font_family=Font.BODY.value,
+                                font_size="0.86rem",
+                                font_weight="500",
+                                color=AltTextColor.MUTED.value,
+                            ),
+                            spacing="2",
+                            wrap="wrap",
+                            align="center",
+                            style={"gap": "0.45rem"},
+                        ),
+                        spacing="1",
+                        align="start",
+                    ),
+                    spacing="3",
+                    align="start",
+                    style={"gap": "1rem"},
+                ),
+                rx.hstack(
+                    rx.icon("calendar", size=14, color=AltTextColor.MUTED.value),
+                    rx.text(
+                        t(item["period_es"], item["period_en"]),
+                        font_family=Font.BODY.value,
+                        font_size="0.78rem",
+                        font_weight="600",
+                        color=AltTextColor.MUTED.value,
+                    ),
+                    spacing="2",
+                    align="center",
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.38rem 0.85rem",
+                        "border_radius": "999px",
+                        "background": AltColor.BACKGROUND.value,
+                        "border": f"1px solid {AltColor.BORDER_STRONG.value}",
+                        "flex_shrink": "0",
+                    },
+                ),
+                justify="between",
+                align="start",
+                direction=rx.breakpoints(initial="column", md="row"),
+                spacing="3",
+                width="100%",
+                style={"gap": "1rem"},
+            ),
+            # Responsibilities list
+            rx.vstack(
+                *[bullet_row(es, en) for es, en in bullets],
+                spacing="2",
+                width="100%",
+                style={"gap": "0.55rem", "paddingTop": "0.4rem"},
+            ),
+            # Tags
+            rx.flex(
+                *[tag_pill(es, en, "green") for es, en in tags],
+                spacing="2",
+                wrap="wrap",
+                style={"gap": "0.55rem", "paddingTop": "0.4rem"},
+            ),
+            spacing="4",
+            align="start",
+            width="100%",
+        ),
+        style=card_css,
+        width="100%",
+    )
+
+
+def experience_section() -> rx.Component:
+    return rx.el.section(
+        rx.box(
+            section_heading(
+                "Trayectoria Profesional",
+                "Career Path",
+                "Experiencia Profesional",
+                "Professional Experience",
+                "Econometría aplicada, estimación de recaudación e inteligencia fiscal en ARBA, dirección de investigaciones federales en el Observatorio Villero y divulgación económica.",
+                "Applied econometrics, revenue forecasting and fiscal intelligence at ARBA, nationwide research leadership at the Socioeconomic Observatory, and economic outreach.",
+            ),
+            rx.vstack(
+                *[experience_card(item) for item in EXPERIENCE],
+                spacing="5",
+                width="100%",
+                style={"gap": "1.5rem"},
+            ),
+            width="100%",
+            max_width=MAX_WIDTH,
+            margin_x="auto",
+            padding_x=["1.25rem", "2rem", "3rem"],
+            padding_y=["3.75rem", "4.75rem"],
+        ),
+        id="experience",
+        style={
+            "width": "100%",
+            "background": AltColor.BACKGROUND_ALT.value,
+            "border_top": f"1px solid {AltColor.BORDER.value}",
+            "border_bottom": f"1px solid {AltColor.BORDER.value}",
+        },
+    )
+
+
+def education_degree_card(item: dict) -> rx.Component:
+    card_css = {
+        **CARD_STYLE,
+        "border_left": f"4px solid {AltTextColor.UNEXPECTED.value}",
+    }
+    return rx.box(
+        rx.vstack(
+            rx.flex(
+                rx.hstack(
+                    rx.box(
+                        rx.icon(
+                            "graduation-cap",
+                            size=24,
+                            color=AltTextColor.UNEXPECTED.value,
+                        ),
+                        style={
+                            "display": "inline-flex",
+                            "align_items": "center",
+                            "justify_content": "center",
+                            "width": "48px",
+                            "height": "48px",
+                            "border_radius": "12px",
+                            "background": AltColor.HIGHLIGHT_SOFT.value,
+                            "flex_shrink": "0",
+                        },
+                    ),
+                    rx.vstack(
+                        rx.text(
+                            t(item["badge_es"], item["badge_en"]),
+                            font_family=Font.BODY.value,
+                            font_size="0.72rem",
+                            font_weight="700",
+                            text_transform="uppercase",
+                            letter_spacing="0.08em",
+                            color=AltTextColor.UNEXPECTED.value,
+                        ),
+                        rx.heading(
+                            t(item["degree_es"], item["degree_en"]),
+                            as_="h3",
+                            font_family=Font.HEADING.value,
+                            font_size=["1.2rem", "1.4rem"],
+                            font_weight="800",
+                            color=AltTextColor.PRIMARY.value,
+                            letter_spacing="-0.02em",
+                        ),
+                        rx.flex(
+                            rx.text(
+                                item["institution"],
+                                font_family=Font.BODY.value,
+                                font_weight="700",
+                                font_size="0.94rem",
+                                color=AltTextColor.SECONDARY.value,
+                            ),
+                            rx.text("·", color=AltTextColor.MUTED.value),
+                            rx.text(
+                                t(item["faculty_es"], item["faculty_en"]),
+                                font_family=Font.BODY.value,
+                                font_weight="500",
+                                font_size="0.9rem",
+                                color=AltTextColor.MUTED.value,
+                            ),
+                            spacing="2",
+                            wrap="wrap",
+                            align="center",
+                            style={"gap": "0.45rem"},
+                        ),
+                        spacing="1",
+                        align="start",
+                    ),
+                    spacing="3",
+                    align="start",
+                    style={"gap": "1rem"},
+                ),
+                rx.hstack(
+                    rx.icon("calendar", size=14, color=AltTextColor.MUTED.value),
+                    rx.text(
+                        t(item["date_es"], item["date_en"]),
+                        font_family=Font.BODY.value,
+                        font_size="0.78rem",
+                        font_weight="600",
+                        color=AltTextColor.MUTED.value,
+                    ),
+                    spacing="2",
+                    align="center",
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.38rem 0.85rem",
+                        "border_radius": "999px",
+                        "background": AltColor.BACKGROUND.value,
+                        "border": f"1px solid {AltColor.BORDER_STRONG.value}",
+                        "flex_shrink": "0",
+                    },
+                ),
+                justify="between",
+                align="start",
+                direction=rx.breakpoints(initial="column", md="row"),
+                spacing="3",
+                width="100%",
+                style={"gap": "1rem"},
+            ),
+            rx.text(
+                t(item["description_es"], item["description_en"]),
+                font_family=Font.BODY.value,
+                font_size="0.94rem",
+                font_weight="400",
+                color=AltTextColor.MUTED.value,
+                line_height="1.65",
+            ),
+            spacing="3",
+            align="start",
+            width="100%",
+        ),
+        style=card_css,
+        width="100%",
+    )
+
+
+def training_card(item: dict) -> rx.Component:
+    tags = list(zip(item["tags_es"], item["tags_en"]))
+    return rx.box(
+        rx.vstack(
+            rx.hstack(
+                rx.box(
+                    rx.icon(
+                        "award",
+                        size=20,
+                        color=AltTextColor.SECONDARY.value,
+                    ),
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "justify_content": "center",
+                        "width": "42px",
+                        "height": "42px",
+                        "border_radius": "10px",
+                        "background": AltColor.ACCENT_SOFT.value,
+                    },
+                ),
+                rx.hstack(
+                    rx.icon("calendar", size=13, color=AltTextColor.MUTED.value),
+                    rx.text(
+                        t(item["date_es"], item["date_en"]),
+                        font_family=Font.BODY.value,
+                        font_size="0.76rem",
+                        font_weight="600",
+                        color=AltTextColor.MUTED.value,
+                    ),
+                    spacing="1",
+                    align="center",
+                    style={
+                        "padding": "0.3rem 0.75rem",
+                        "border_radius": "999px",
+                        "background": AltColor.BACKGROUND.value,
+                        "border": f"1px solid {AltColor.BORDER.value}",
+                    },
+                ),
+                justify="between",
+                align="center",
+                width="100%",
+            ),
+            rx.heading(
+                t(item["title_es"], item["title_en"]),
+                as_="h4",
+                font_family=Font.HEADING.value,
+                font_size="1.1rem",
+                font_weight="700",
+                color=AltTextColor.PRIMARY.value,
+                line_height="1.4",
+                letter_spacing="-0.01em",
+            ),
+            rx.text(
+                item["institution"],
+                font_family=Font.BODY.value,
+                font_weight="700",
+                font_size="0.88rem",
+                color=AltTextColor.UNEXPECTED.value,
+            ),
+            rx.text(
+                t(item["description_es"], item["description_en"]),
+                font_family=Font.BODY.value,
+                font_size="0.9rem",
+                font_weight="400",
+                color=AltTextColor.MUTED.value,
+                line_height="1.65",
+            ),
+            rx.flex(
+                *[tag_pill(es, en, "green") for es, en in tags],
+                spacing="2",
+                wrap="wrap",
+                style={"gap": "0.55rem", "paddingTop": "0.4rem"},
+            ),
+            spacing="3",
+            align="start",
+            width="100%",
+            height="100%",
+        ),
+        style=CARD_STYLE,
+        width="100%",
+        height="100%",
+    )
+
+
+def education_section() -> rx.Component:
+    return rx.el.section(
+        rx.box(
+            section_heading(
+                "Formación Académica",
+                "Academic Background",
+                "Educación y Formación Continua",
+                "Education & Continuous Training",
+                "Formación universitaria de grado en Economía (UBA), Diplomatura en Análisis de Datos para el Sector Público (IPAP – UTN La Plata) y especialización continua.",
+                "University degree in Economics (UBA), Diploma in Data Analysis for the Public Sector (IPAP – UTN La Plata), and continuous specialization.",
+            ),
+            rx.vstack(
+                # Grado Universitario y Diplomatura
+                *[education_degree_card(item) for item in EDUCATION],
+                # Subheader for Formación Continua / Especialización
+                rx.hstack(
+                    rx.icon("sparkles", size=19, color=AltTextColor.SECONDARY.value),
+                    rx.text(
+                        t(
+                            "Cursos de Especialización y Formación Continua",
+                            "Additional Training & Specialization Courses",
+                        ),
+                        font_family=Font.HEADING.value,
+                        font_size="1.15rem",
+                        font_weight="700",
+                        color=AltTextColor.PRIMARY.value,
+                        letter_spacing="-0.01em",
+                    ),
+                    spacing="2",
+                    align="center",
+                    style={"paddingTop": "1.25rem", "paddingBottom": "0.25rem"},
+                ),
+                rx.grid(
+                    *[training_card(item) for item in TRAINING],
+                    columns=rx.breakpoints(initial="1", md="2"),
+                    spacing="5",
+                    width="100%",
+                    style={"gap": "1.5rem"},
+                ),
+                spacing="4",
+                align="start",
+                width="100%",
+                style={"gap": "1.25rem"},
+            ),
+            width="100%",
+            max_width=MAX_WIDTH,
+            margin_x="auto",
+            padding_x=["1.25rem", "2rem", "3rem"],
+            padding_y=["3.75rem", "4.75rem"],
+        ),
+        id="education",
+        style={
+            "width": "100%",
+            "background": AltColor.BACKGROUND.value,
+        },
+    )
+
+
+def skill_category_card(item: dict) -> rx.Component:
+    skills = list(zip(item["items_es"], item["items_en"]))
+    return rx.box(
+        rx.vstack(
+            rx.hstack(
+                rx.box(
+                    rx.icon(
+                        item["icon"],
+                        size=22,
+                        color=AltTextColor.SECONDARY.value,
+                    ),
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "justify_content": "center",
+                        "width": "44px",
+                        "height": "44px",
+                        "border_radius": "12px",
+                        "background": AltColor.ACCENT_SOFT.value,
+                        "flex_shrink": "0",
+                    },
+                ),
+                rx.heading(
+                    t(item["category_es"], item["category_en"]),
+                    as_="h3",
+                    font_family=Font.HEADING.value,
+                    font_size="1.12rem",
+                    font_weight="700",
+                    color=AltTextColor.PRIMARY.value,
+                    letter_spacing="-0.01em",
+                ),
+                spacing="3",
+                align="center",
+                style={"gap": "0.85rem"},
+            ),
+            rx.text(
+                t(item["description_es"], item["description_en"]),
+                font_family=Font.BODY.value,
+                font_size="0.88rem",
+                font_weight="400",
+                color=AltTextColor.MUTED.value,
+                line_height="1.6",
+            ),
+            rx.flex(
+                *[
+                    rx.box(
+                        rx.text(
+                            t(es, en),
+                            font_family=Font.BODY.value,
+                            font_size="0.8rem",
+                            font_weight="600",
+                            color=AltTextColor.PRIMARY.value,
+                        ),
+                        style={
+                            "display": "inline-flex",
+                            "align_items": "center",
+                            "padding": "0.38rem 0.8rem",
+                            "border_radius": "10px",
+                            "background": AltColor.BACKGROUND.value,
+                            "border": f"1px solid {AltColor.BORDER_STRONG.value}",
+                        },
+                    )
+                    for es, en in skills
+                ],
+                spacing="2",
+                wrap="wrap",
+                style={"gap": "0.55rem", "paddingTop": "0.35rem"},
+            ),
+            spacing="3",
+            align="start",
+            width="100%",
+            height="100%",
+        ),
+        style=CARD_STYLE,
+        width="100%",
+        height="100%",
+    )
+
+
+def skills_section() -> rx.Component:
+    return rx.el.section(
+        rx.box(
+            section_heading(
+                "Capacidades Técnicas",
+                "Technical Capabilities",
+                "Habilidades y Herramientas",
+                "Skills & Toolkit",
+                "Dominio del ciclo completo del dato: econometría aplicada, ingeniería de datos (ETL y APIs), operativos estadísticos en campo, visualización y ciencia abierta.",
+                "Full-cycle data capabilities: applied econometrics, data engineering (ETL & APIs), field survey operations, visualization, and open science.",
+            ),
+            rx.grid(
+                *[skill_category_card(item) for item in SKILLS],
+                columns=rx.breakpoints(initial="1", md="3"),
+                spacing="5",
+                width="100%",
+                style={"gap": "1.5rem"},
+            ),
+            width="100%",
+            max_width=MAX_WIDTH,
+            margin_x="auto",
+            padding_x=["1.25rem", "2rem", "3rem"],
+            padding_y=["3.75rem", "4.75rem"],
+        ),
+        id="skills",
+        style={
+            "width": "100%",
+            "background": AltColor.BACKGROUND_ALT.value,
+            "border_top": f"1px solid {AltColor.BORDER.value}",
+            "border_bottom": f"1px solid {AltColor.BORDER.value}",
+        },
+    )
+
+
+def publication_link_button(link: dict, idx: int = 0) -> rx.Component:
+    is_primary = idx == 0
+    return rx.el.a(
+        rx.hstack(
+            rx.text(
+                t(link["label_es"], link["label_en"]),
+                font_family=Font.BODY.value,
+                font_size="0.8rem",
+                font_weight="700",
+            ),
+            rx.icon("arrow-up-right", size=14),
+            spacing="1",
+            align="center",
+        ),
+        href=link["url"],
+        target="_blank",
+        rel="noopener noreferrer",
+        style={
+            "display": "inline-flex",
+            "align_items": "center",
+            "padding": "0.42rem 0.9rem",
+            "border_radius": "999px",
+            "background": (
+                AltColor.ACCENT_SOFT.value
+                if is_primary
+                else AltColor.BACKGROUND.value
+            ),
+            "color": (
+                AltTextColor.SECONDARY.value
+                if is_primary
+                else AltTextColor.PRIMARY.value
+            ),
+            "border": (
+                "1px solid rgba(43, 122, 88, 0.25)"
+                if is_primary
+                else f"1px solid {AltColor.BORDER_STRONG.value}"
+            ),
+            "text_decoration": "none",
+            "transition": "all 0.2s ease",
+        },
+        _hover={
+            "background": Color.ACCENT.value,
+            "color": Color.BACKGROUND_DEEP.value,
+            "border_color": Color.ACCENT.value,
+            "transform": "translateY(-1px)",
+        },
+    )
+
+
+def publication_card(item: dict) -> rx.Component:
+    is_green = item["accent"] == "green"
+    links = item.get("links", [])
+    has_description = bool(item.get("description_es"))
+    return rx.box(
+        rx.vstack(
+            rx.hstack(
+                rx.hstack(
+                    rx.icon(
+                        item["icon"],
+                        size=15,
+                        color=(
+                            AltTextColor.SECONDARY.value
+                            if is_green
+                            else AltTextColor.UNEXPECTED.value
+                        ),
+                    ),
+                    rx.text(
+                        t(item["type_es"], item["type_en"]),
+                        font_family=Font.BODY.value,
+                        font_size="0.72rem",
+                        font_weight="700",
+                        text_transform="uppercase",
+                        letter_spacing="0.06em",
+                        color=(
+                            AltTextColor.SECONDARY.value
+                            if is_green
+                            else AltTextColor.UNEXPECTED.value
+                        ),
+                    ),
+                    spacing="2",
+                    align="center",
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.3rem 0.75rem",
+                        "border_radius": "999px",
+                        "background": (
+                            AltColor.ACCENT_SOFT.value
+                            if is_green
+                            else AltColor.HIGHLIGHT_SOFT.value
+                        ),
+                    },
+                ),
+                rx.text(
+                    item["year"],
+                    font_family=Font.BODY.value,
+                    font_size="0.78rem",
+                    font_weight="700",
+                    color=AltTextColor.MUTED.value,
+                ),
+                justify="between",
+                align="center",
+                width="100%",
+            ),
+            rx.heading(
+                t(item["title_es"], item["title_en"]),
+                as_="h3",
+                font_family=Font.HEADING.value,
+                font_size=["1.05rem", "1.14rem"],
+                font_weight="700",
+                color=AltTextColor.PRIMARY.value,
+                line_height="1.45",
+                letter_spacing="-0.01em",
+            ),
+            rx.text(
+                item["authors"],
+                font_family=Font.BODY.value,
+                font_size="0.86rem",
+                font_weight="600",
+                color=AltTextColor.PRIMARY.value,
+            ),
+            rx.cond(
+                has_description,
+                rx.text(
+                    t(item.get("description_es", ""), item.get("description_en", "")),
+                    font_family=Font.BODY.value,
+                    font_size="0.88rem",
+                    font_weight="400",
+                    color=AltTextColor.MUTED.value,
+                    line_height="1.62",
+                ),
+            ),
+            rx.text(
+                t(item["venue_es"], item["venue_en"]),
+                font_family=Font.BODY.value,
+                font_size="0.82rem",
+                font_style="italic",
+                font_weight="500",
+                color=AltTextColor.MUTED.value,
+                line_height="1.5",
+            ),
+            rx.cond(
+                len(links) > 0,
+                rx.flex(
+                    *[
+                        publication_link_button(link, idx)
+                        for idx, link in enumerate(links)
+                    ],
+                    spacing="2",
+                    wrap="wrap",
+                    style={"gap": "0.55rem", "paddingTop": "0.35rem"},
+                ),
+            ),
+            spacing="3",
+            align="start",
+            width="100%",
+            height="100%",
+        ),
+        style=CARD_STYLE,
+        width="100%",
+        height="100%",
+    )
+
+
+def publications_section() -> rx.Component:
+    return rx.el.section(
+        rx.box(
+            section_heading(
+                "Proyectos, Relevamientos y Producción Académica",
+                "Projects, Surveys & Academic Output",
+                "Proyectos, Investigaciones y Publicaciones",
+                "Projects, Research & Publications",
+                "Relevamientos socioeconómicos federales, plataformas interactivas, repositorios de ciencia abierta (Observadata) y publicaciones del Observatorio Villero.",
+                "Nationwide socioeconomic surveys, interactive platforms, open science repositories (Observadata), and publications from the Socioeconomic Observatory.",
+            ),
+            rx.flex(
+                rx.el.a(
+                    rx.hstack(
+                        rx.icon("globe", size=16),
+                        rx.text(
+                            t(
+                                "Sitio oficial del Observatorio Villero",
+                                "Observatorio Villero Official Website",
+                            ),
+                            font_family=Font.BODY.value,
+                            font_size="0.84rem",
+                            font_weight="700",
+                        ),
+                        rx.icon("arrow-up-right", size=15),
+                        spacing="2",
+                        align="center",
+                    ),
+                    href="https://observatoriovillero.lapoderosa.org.ar/",
+                    target="_blank",
+                    rel="noopener noreferrer",
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.55rem 1.1rem",
+                        "border_radius": "999px",
+                        "background": Color.BACKGROUND.value,
+                        "color": Color.PRIMARY.value,
+                        "text_decoration": "none",
+                        "transition": "all 0.2s ease",
+                    },
+                    _hover={
+                        "background": Color.ACCENT.value,
+                        "color": Color.BACKGROUND_DEEP.value,
+                        "transform": "translateY(-1px)",
+                    },
+                ),
+                rx.el.a(
+                    rx.hstack(
+                        rx.icon("database", size=16),
+                        rx.text(
+                            t(
+                                "Observadata · Repositorio de Datos Abiertos (GitHub)",
+                                "Observadata · Open Data Repository (GitHub)",
+                            ),
+                            font_family=Font.BODY.value,
+                            font_size="0.84rem",
+                            font_weight="700",
+                        ),
+                        rx.icon("arrow-up-right", size=15),
+                        spacing="2",
+                        align="center",
+                    ),
+                    href="https://github.com/ObservatorioVillero/observadata",
+                    target="_blank",
+                    rel="noopener noreferrer",
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.55rem 1.1rem",
+                        "border_radius": "999px",
+                        "background": AltColor.ACCENT_SOFT.value,
+                        "color": AltTextColor.SECONDARY.value,
+                        "border": "1px solid rgba(43, 122, 88, 0.25)",
+                        "text_decoration": "none",
+                        "transition": "all 0.2s ease",
+                    },
+                    _hover={
+                        "background": Color.ACCENT.value,
+                        "color": Color.BACKGROUND_DEEP.value,
+                        "transform": "translateY(-1px)",
+                    },
+                ),
+                spacing="3",
+                wrap="wrap",
+                align="center",
+                style={"gap": "0.75rem", "marginBottom": "1.75rem"},
+            ),
+            rx.grid(
+                *[publication_card(item) for item in PUBLICATIONS],
+                columns=rx.breakpoints(initial="1", md="2"),
+                spacing="5",
+                width="100%",
+                style={"gap": "1.5rem"},
+            ),
+            width="100%",
+            max_width=MAX_WIDTH,
+            margin_x="auto",
+            padding_x=["1.25rem", "2rem", "3rem"],
+            padding_y=["3.75rem", "4.75rem"],
+        ),
+        id="publications",
+        style={
+            "width": "100%",
+            "background": AltColor.BACKGROUND.value,
+        },
+    )
