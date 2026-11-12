@@ -7,7 +7,14 @@ from about.styles.styles import (
     CARD_STYLE,
 )
 from about.constants import MAX_WIDTH
-from about.data import EXPERIENCE, EDUCATION, TRAINING, SKILLS, PUBLICATIONS
+from about.data import (
+    EXPERIENCE,
+    EDUCATION,
+    TRAINING,
+    SKILLS,
+    PYPI_PACKAGES,
+    PUBLICATIONS,
+)
 from about.state import t
 
 
@@ -844,93 +851,275 @@ def publication_card(item: dict) -> rx.Component:
     )
 
 
+def pypi_package_card(item: dict) -> rx.Component:
+    links = [
+        {
+            "label_es": "Ver en PyPI",
+            "label_en": "View on PyPI",
+            "url": item["pypi_url"],
+        },
+        {
+            "label_es": "Repositorio en GitHub",
+            "label_en": "GitHub Repository",
+            "url": item["github_url"],
+        },
+    ]
+    card_css = {
+        **CARD_STYLE,
+        "border_left": f"4px solid {Color.ACCENT.value}",
+    }
+    return rx.box(
+        rx.vstack(
+            rx.hstack(
+                rx.hstack(
+                    rx.icon(
+                        item["icon"],
+                        size=15,
+                        color=AltTextColor.SECONDARY.value,
+                    ),
+                    rx.text(
+                        t(item["category_es"], item["category_en"]),
+                        font_family=Font.BODY.value,
+                        font_size="0.72rem",
+                        font_weight="700",
+                        text_transform="uppercase",
+                        letter_spacing="0.06em",
+                        color=AltTextColor.SECONDARY.value,
+                    ),
+                    spacing="2",
+                    align="center",
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.3rem 0.75rem",
+                        "border_radius": "999px",
+                        "background": AltColor.ACCENT_SOFT.value,
+                    },
+                ),
+                rx.box(
+                    rx.text(
+                        "PyPI · Python",
+                        font_family=Font.BODY.value,
+                        font_size="0.7rem",
+                        font_weight="800",
+                        letter_spacing="0.05em",
+                        color=AltTextColor.UNEXPECTED.value,
+                    ),
+                    style={
+                        "padding": "0.24rem 0.65rem",
+                        "border_radius": "999px",
+                        "background": AltColor.HIGHLIGHT_SOFT.value,
+                        "border": "1px solid rgba(155, 77, 77, 0.22)",
+                    },
+                ),
+                justify="between",
+                align="center",
+                width="100%",
+                wrap="wrap",
+                style={"gap": "0.5rem"},
+            ),
+            rx.flex(
+                rx.heading(
+                    item["name"],
+                    as_="h3",
+                    font_family=Font.HEADING.value,
+                    font_size=["1.15rem", "1.25rem"],
+                    font_weight="800",
+                    color=AltTextColor.PRIMARY.value,
+                    letter_spacing="-0.02em",
+                ),
+                rx.box(
+                    rx.hstack(
+                        rx.icon("terminal", size=13, color=Color.ACCENT.value),
+                        rx.text(
+                            item["install_cmd"],
+                            font_family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+                            font_size="0.76rem",
+                            font_weight="600",
+                            color=Color.PRIMARY.value,
+                        ),
+                        spacing="2",
+                        align="center",
+                    ),
+                    style={
+                        "display": "inline-flex",
+                        "align_items": "center",
+                        "padding": "0.28rem 0.7rem",
+                        "border_radius": "8px",
+                        "background": Color.BACKGROUND.value,
+                    },
+                ),
+                justify="between",
+                align="center",
+                wrap="wrap",
+                width="100%",
+                style={"gap": "0.6rem"},
+            ),
+            rx.text(
+                t(item["description_es"], item["description_en"]),
+                font_family=Font.BODY.value,
+                font_size="0.88rem",
+                font_weight="400",
+                color=AltTextColor.MUTED.value,
+                line_height="1.62",
+            ),
+            rx.flex(
+                *[
+                    publication_link_button(link, idx)
+                    for idx, link in enumerate(links)
+                ],
+                spacing="2",
+                wrap="wrap",
+                style={"gap": "0.55rem", "paddingTop": "0.25rem"},
+            ),
+            spacing="3",
+            align="start",
+            width="100%",
+            height="100%",
+        ),
+        style=card_css,
+        width="100%",
+        height="100%",
+    )
+
+
 def publications_section() -> rx.Component:
     return rx.el.section(
         rx.box(
             section_heading(
-                "Proyectos, Relevamientos y Producción Académica",
-                "Projects, Surveys & Academic Output",
-                "Proyectos, Investigaciones y Publicaciones",
-                "Projects, Research & Publications",
-                "Relevamientos socioeconómicos federales, plataformas interactivas, repositorios de ciencia abierta (Observadata) y publicaciones del Observatorio Villero.",
-                "Nationwide socioeconomic surveys, interactive platforms, open science repositories (Observadata), and publications from the Socioeconomic Observatory.",
+                "Software Open-Source, Relevamientos y Producción Académica",
+                "Open-Source Software, Surveys & Academic Output",
+                "Proyectos, Librerías y Publicaciones",
+                "Projects, Packages & Publications",
+                "Librerías de Python publicadas en PyPI, plataformas interactivas de análisis, relevamientos socioeconómicos federales y ciencia abierta (Observadata).",
+                "Python libraries published on PyPI, interactive analytics platforms, nationwide socioeconomic surveys, and open science (Observadata).",
             ),
-            rx.flex(
-                rx.el.a(
-                    rx.hstack(
-                        rx.icon("globe", size=16),
-                        rx.text(
-                            t(
-                                "Sitio oficial del Observatorio Villero",
-                                "Observatorio Villero Official Website",
-                            ),
-                            font_family=Font.BODY.value,
-                            font_size="0.84rem",
-                            font_weight="700",
-                        ),
-                        rx.icon("arrow-up-right", size=15),
-                        spacing="2",
-                        align="center",
+            # Subheader 1: Librerías Open-Source en PyPI
+            rx.hstack(
+                rx.icon("package", size=20, color=AltTextColor.SECONDARY.value),
+                rx.text(
+                    t(
+                        "Librerías Open-Source en Python (PyPI)",
+                        "Open-Source Python Packages (PyPI)",
                     ),
-                    href="https://observatoriovillero.lapoderosa.org.ar/",
-                    target="_blank",
-                    rel="noopener noreferrer",
-                    style={
-                        "display": "inline-flex",
-                        "align_items": "center",
-                        "padding": "0.55rem 1.1rem",
-                        "border_radius": "999px",
-                        "background": Color.BACKGROUND.value,
-                        "color": Color.PRIMARY.value,
-                        "text_decoration": "none",
-                        "transition": "all 0.2s ease",
-                    },
-                    _hover={
-                        "background": Color.ACCENT.value,
-                        "color": Color.BACKGROUND_DEEP.value,
-                        "transform": "translateY(-1px)",
-                    },
+                    font_family=Font.HEADING.value,
+                    font_size="1.2rem",
+                    font_weight="800",
+                    color=AltTextColor.PRIMARY.value,
+                    letter_spacing="-0.02em",
                 ),
-                rx.el.a(
-                    rx.hstack(
-                        rx.icon("database", size=16),
-                        rx.text(
-                            t(
-                                "Observadata · Repositorio de Datos Abiertos (GitHub)",
-                                "Observadata · Open Data Repository (GitHub)",
-                            ),
-                            font_family=Font.BODY.value,
-                            font_size="0.84rem",
-                            font_weight="700",
-                        ),
-                        rx.icon("arrow-up-right", size=15),
-                        spacing="2",
-                        align="center",
-                    ),
-                    href="https://github.com/ObservatorioVillero/observadata",
-                    target="_blank",
-                    rel="noopener noreferrer",
-                    style={
-                        "display": "inline-flex",
-                        "align_items": "center",
-                        "padding": "0.55rem 1.1rem",
-                        "border_radius": "999px",
-                        "background": AltColor.ACCENT_SOFT.value,
-                        "color": AltTextColor.SECONDARY.value,
-                        "border": "1px solid rgba(43, 122, 88, 0.25)",
-                        "text_decoration": "none",
-                        "transition": "all 0.2s ease",
-                    },
-                    _hover={
-                        "background": Color.ACCENT.value,
-                        "color": Color.BACKGROUND_DEEP.value,
-                        "transform": "translateY(-1px)",
-                    },
-                ),
-                spacing="3",
-                wrap="wrap",
+                spacing="2",
                 align="center",
-                style={"gap": "0.75rem", "marginBottom": "1.75rem"},
+                style={"marginBottom": "1rem"},
+            ),
+            rx.grid(
+                *[pypi_package_card(item) for item in PYPI_PACKAGES],
+                columns=rx.breakpoints(initial="1", md="2"),
+                spacing="5",
+                width="100%",
+                style={"gap": "1.5rem", "marginBottom": "3rem"},
+            ),
+            # Subheader 2: Investigaciones, Relevamientos y Publicaciones
+            rx.flex(
+                rx.hstack(
+                    rx.icon("book-open", size=20, color=AltTextColor.SECONDARY.value),
+                    rx.text(
+                        t(
+                            "Investigaciones, Relevamientos y Plataformas Interactivas",
+                            "Research, Surveys & Interactive Platforms",
+                        ),
+                        font_family=Font.HEADING.value,
+                        font_size="1.2rem",
+                        font_weight="800",
+                        color=AltTextColor.PRIMARY.value,
+                        letter_spacing="-0.02em",
+                    ),
+                    spacing="2",
+                    align="center",
+                ),
+                rx.flex(
+                    rx.el.a(
+                        rx.hstack(
+                            rx.icon("globe", size=16),
+                            rx.text(
+                                t(
+                                    "Sitio oficial del Observatorio Villero",
+                                    "Observatorio Villero Official Website",
+                                ),
+                                font_family=Font.BODY.value,
+                                font_size="0.82rem",
+                                font_weight="700",
+                            ),
+                            rx.icon("arrow-up-right", size=15),
+                            spacing="2",
+                            align="center",
+                        ),
+                        href="https://observatoriovillero.lapoderosa.org.ar/",
+                        target="_blank",
+                        rel="noopener noreferrer",
+                        style={
+                            "display": "inline-flex",
+                            "align_items": "center",
+                            "padding": "0.5rem 1rem",
+                            "border_radius": "999px",
+                            "background": Color.BACKGROUND.value,
+                            "color": Color.PRIMARY.value,
+                            "text_decoration": "none",
+                            "transition": "all 0.2s ease",
+                        },
+                        _hover={
+                            "background": Color.ACCENT.value,
+                            "color": Color.BACKGROUND_DEEP.value,
+                            "transform": "translateY(-1px)",
+                        },
+                    ),
+                    rx.el.a(
+                        rx.hstack(
+                            rx.icon("database", size=16),
+                            rx.text(
+                                t(
+                                    "Observadata · Datos Abiertos (GitHub)",
+                                    "Observadata · Open Data (GitHub)",
+                                ),
+                                font_family=Font.BODY.value,
+                                font_size="0.82rem",
+                                font_weight="700",
+                            ),
+                            rx.icon("arrow-up-right", size=15),
+                            spacing="2",
+                            align="center",
+                        ),
+                        href="https://github.com/ObservatorioVillero/observadata",
+                        target="_blank",
+                        rel="noopener noreferrer",
+                        style={
+                            "display": "inline-flex",
+                            "align_items": "center",
+                            "padding": "0.5rem 1rem",
+                            "border_radius": "999px",
+                            "background": AltColor.ACCENT_SOFT.value,
+                            "color": AltTextColor.SECONDARY.value,
+                            "border": "1px solid rgba(43, 122, 88, 0.25)",
+                            "text_decoration": "none",
+                            "transition": "all 0.2s ease",
+                        },
+                        _hover={
+                            "background": Color.ACCENT.value,
+                            "color": Color.BACKGROUND_DEEP.value,
+                            "transform": "translateY(-1px)",
+                        },
+                    ),
+                    spacing="3",
+                    wrap="wrap",
+                    align="center",
+                    style={"gap": "0.65rem"},
+                ),
+                justify="between",
+                align="center",
+                direction=rx.breakpoints(initial="column", md="row"),
+                wrap="wrap",
+                width="100%",
+                style={"gap": "1rem", "marginBottom": "1.25rem"},
             ),
             rx.grid(
                 *[publication_card(item) for item in PUBLICATIONS],

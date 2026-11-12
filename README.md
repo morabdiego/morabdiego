@@ -28,7 +28,7 @@
 
 <br />
 
-## Open-Source Packages & Datasets
+## Open-Source Packages, Platforms & Datasets
 
 | Project | Description | Package / Source |
 | :--- | :--- | :--- |
@@ -36,6 +36,7 @@
 | **[pyBCRAdata](https://github.com/morabdiego/pybcradata)** | Python library for fetching monetary, exchange rate, and financial time series from the Central Bank of Argentina (**BCRA**) API. | [![PyPI](https://img.shields.io/pypi/v/pybcradata?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/pybcradata/) |
 | **[xlsform-to-registro](https://github.com/morabdiego/xlsform-to-registro)** | CLI & Python library that converts standard **XLSForm** surveys (*KoboToolbox, ODK, Enketo*) into publication-ready institutional Excel Data Dictionaries (*Diseños de Registro*), translating `relevant` skip logic into target universes and extracting large catalogues. | [![PyPI](https://img.shields.io/pypi/v/xlsform-to-registro?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/xlsform-to-registro/) |
 | **[kobo-api-v2](https://github.com/morabdiego/kobo-api-v2)** | Lightweight synchronous Python client for the **KoboToolbox API v2** featuring one-call Excel/CSV exports, reusable export settings, and automated polling. | [![PyPI](https://img.shields.io/pypi/v/kobo-api-v2?color=1B4332&label=PyPI&logo=pypi&logoColor=white)](https://pypi.org/project/kobo-api-v2/) |
+| **[Multidimensional Poverty Monitor (CABA)](https://pobreza-multidimensional.streamlit.app/)** | Interactive **Streamlit** platform & data storytelling on official multidimensional and structural poverty in Buenos Aires City (*Alkire-Foster method*) using public **EAH – IDECBA** microdata (2021 & 2025), based on my B.A. thesis. | [![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)](https://pobreza-multidimensional.streamlit.app/) |
 | **[Observadata](https://github.com/ObservatorioVillero/observadata)** | Open-science repository of anonymized socioeconomic microdata and FAIR-standard metadata backed by Zenodo DOIs. | [![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?logo=github&logoColor=white)](https://github.com/ObservatorioVillero/observadata) |
 
 ```bash

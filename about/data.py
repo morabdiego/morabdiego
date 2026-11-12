@@ -445,6 +445,83 @@ SKILLS = [
     },
 ]
 
+PYPI_PACKAGES = [
+    {
+        "name": "pyindec",
+        "install_cmd": "pip install pyindec",
+        "category_es": "Estadísticas Oficiales · API INDEC",
+        "category_en": "Official Statistics · INDEC API",
+        "description_es": (
+            "Cliente Python para la API PostgREST del INDEC con QueryBuilder fluido, "
+            "normalización de columnas y paginación automática en 19 endpoints oficiales "
+            "(IPC, EMAE, EPH, Canastas, Comex, etc.)."
+        ),
+        "description_en": (
+            "Python client for Argentina's National Statistics Institute (INDEC) PostgREST API "
+            "with fluent QueryBuilder, column normalization, and automatic pagination across "
+            "19 official endpoints (CPI, EMAE, EPH, etc.)."
+        ),
+        "pypi_url": "https://pypi.org/project/pyindec/",
+        "github_url": "https://github.com/morabdiego/pyindec",
+        "icon": "trending-up",
+    },
+    {
+        "name": "pyBCRAdata",
+        "install_cmd": "pip install pybcradata",
+        "category_es": "Series Monetarias · API BCRA",
+        "category_en": "Monetary Series · BCRA API",
+        "description_es": (
+            "Librería Python para consultar y descargar series de tiempo monetarias, "
+            "cambiarias y financieras desde la API oficial del Banco Central de la "
+            "República Argentina (BCRA)."
+        ),
+        "description_en": (
+            "Python library for fetching monetary, exchange rate, and financial time "
+            "series from the Central Bank of Argentina (BCRA) official API."
+        ),
+        "pypi_url": "https://pypi.org/project/pybcradata/",
+        "github_url": "https://github.com/morabdiego/pybcradata",
+        "icon": "landmark",
+    },
+    {
+        "name": "xlsform-to-registro",
+        "install_cmd": "pip install xlsform-to-registro",
+        "category_es": "Ingeniería de Encuestas · XLSForm",
+        "category_en": "Survey Engineering · XLSForm",
+        "description_es": (
+            "CLI y librería Python que convierte formularios XLSForm (KoboToolbox, ODK, Enketo) "
+            "en Diseños de Registro institucionales en Excel, traduciendo lógica relevant a "
+            "universos y extrayendo catálogos extensos."
+        ),
+        "description_en": (
+            "CLI & Python library that converts standard XLSForm surveys (KoboToolbox, ODK, Enketo) "
+            "into publication-ready Excel Data Dictionaries (Diseños de Registro), translating skip "
+            "logic into target universes."
+        ),
+        "pypi_url": "https://pypi.org/project/xlsform-to-registro/",
+        "github_url": "https://github.com/morabdiego/xlsform-to-registro",
+        "icon": "file-spreadsheet",
+    },
+    {
+        "name": "kobo-api-v2",
+        "install_cmd": "pip install kobo-api-v2",
+        "category_es": "Automatización ETL · KoboToolbox API",
+        "category_en": "ETL Automation · KoboToolbox API",
+        "description_es": (
+            "Cliente Python sincrónico y liviano para la API v2 de KoboToolbox con "
+            "exportación directa a Excel/CSV en una llamada, configuraciones reutilizables "
+            "y polling automatizado."
+        ),
+        "description_en": (
+            "Lightweight synchronous Python client for the KoboToolbox API v2 featuring "
+            "one-call Excel/CSV exports, reusable export settings, and automated polling."
+        ),
+        "pypi_url": "https://pypi.org/project/kobo-api-v2/",
+        "github_url": "https://github.com/morabdiego/kobo-api-v2",
+        "icon": "terminal",
+    },
+]
+
 PUBLICATIONS = [
     {
         "type_es": "DataViz & Storytelling · Monitor Interactivo",
