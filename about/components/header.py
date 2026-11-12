@@ -289,7 +289,7 @@ def header() -> rx.Component:
                         rx.hstack(
                             rx.icon("briefcase", size=17),
                             rx.text(
-                                t("Ver Experiencia y CV", "View Experience & CV"),
+                                t("Ver experiencia", "View Experience & CV"),
                                 font_family=Font.BODY.value,
                                 font_weight="700",
                                 font_size="0.88rem",

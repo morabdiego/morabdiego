@@ -5,5 +5,5 @@ from about.styles.styles import STYLESHEETS, GLOBAL_STYLE
 app = rx.App(
     enable_state=False,
     stylesheets=STYLESHEETS,
-    style=GLOBAL_STYLE,
+    style=GLOBAL_STYLE, # type: ignore
 )

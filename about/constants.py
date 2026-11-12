@@ -41,7 +41,7 @@ NAV_SECTIONS = [
 
 # Social Links with icons and bilingual tooltips
 SOCIAL_LINKS = [
-    (LINKEDIN_URL, "ico_linkedin.png", "LinkedIn", "Conectar en LinkedIn", "Connect on LinkedIn"),
+    # (LINKEDIN_URL, "ico_linkedin.png", "LinkedIn", "Conectar en LinkedIn", "Connect on LinkedIn"),
     (GITHUB_URL, "ico_github.png", "GitHub", "Ver proyectos en GitHub", "Check out my GitHub"),
     (GMAIL_URL, "ico_email.png", "Email", f"Escribir a {GMAIL_ADDRESS}", f"Email me at {GMAIL_ADDRESS}"),
     (INSTAGRAM_URL, "ico_instagram.png", "Instagram", "Seguir en Instagram", "Follow on Instagram"),
@@ -51,8 +51,3 @@ SOCIAL_LINKS = [
 MAX_WIDTH = "1120px"
 FULL_WIDTH = "100%"
 
-# Legacy Markdown paths (kept for compatibility)
-ABOUT_MD_EN = "assets/content/about-EN.md"
-ABOUT_MD_ES = "assets/content/about-ES.md"
-PUBLICATIONS_MD_EN = "assets/content/publications-EN.md"
-PUBLICATIONS_MD_ES = "assets/content/publications-ES.md"
