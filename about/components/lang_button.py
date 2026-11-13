@@ -61,7 +61,11 @@ def language_switch() -> rx.Component:
         spacing="1",
         align="center",
         padding="4px",
-        background=Color.SURFACE.value,
-        border=f"1px solid {Color.BORDER.value}",
-        border_radius="999px",
+        style={
+            "background": "rgba(255, 255, 255, 0.08)",
+            "backdrop_filter": "blur(12px)",
+            "-webkit-backdrop-filter": "blur(12px)",
+            "border": "1px solid rgba(240, 238, 220, 0.18)",
+            "border_radius": "999px",
+        },
     )

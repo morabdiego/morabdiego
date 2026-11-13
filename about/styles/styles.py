@@ -106,15 +106,18 @@ GLOBAL_STYLE = {
 }
 
 CARD_STYLE = {
-    "background": AltColor.CARD_BG.value,
+    "background": "rgba(251, 250, 243, 0.72)",
+    "backdrop_filter": "blur(14px) saturate(140%)",
+    "-webkit-backdrop-filter": "blur(14px) saturate(140%)",
     "border": f"1px solid {AltColor.BORDER_STRONG.value}",
     "border_radius": "12px",
     "padding": ["1.35rem", "1.65rem", "2rem"],
-    "box_shadow": "0 1px 3px rgba(30, 30, 30, 0.04)",
-    "transition": "border-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease",
+    "box_shadow": "inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 4px 16px -4px rgba(30, 30, 30, 0.05)",
+    "transition": "background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease",
     "_hover": {
+        "background": "rgba(251, 250, 243, 0.88)",
         "transform": "translateY(-2px)",
-        "box_shadow": "0 10px 24px -8px rgba(30, 30, 30, 0.08)",
+        "box_shadow": "inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 12px 26px -8px rgba(30, 30, 30, 0.09)",
         "border_color": Color.ACCENT.value,
     },
 }
