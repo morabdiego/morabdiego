@@ -1,8 +1,9 @@
 import reflex as rx
 from reflex.experimental.client_state import ClientStateVar
 
-# Client-side state variable for language switching (works 100% statically on GitHub Pages without a backend)
+# Client-side state variables (work 100% statically on GitHub Pages without a backend)
 is_spanish = ClientStateVar.create("is_spanish", default=True)
+mobile_menu_open = ClientStateVar.create("mobile_menu_open", default=False)
 
 
 def t(es_text: str, en_text: str) -> rx.Var:

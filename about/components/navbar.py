@@ -2,29 +2,68 @@ import reflex as rx
 from about.styles.styles import Color, TextColor, Font
 from about.constants import NAV_SECTIONS, MAX_WIDTH
 from about.components.lang_button import language_switch
-from about.state import t
+from about.state import t, mobile_menu_open
 
 
-def nav_anchor_item(href: str, label_es: str, label_en: str) -> rx.Component:
+def nav_anchor_item(
+    href: str, label_es: str, label_en: str, *, full_width: bool = False
+) -> rx.Component:
+    style = {
+        "display": "inline-flex",
+        "align_items": "center",
+        "color": TextColor.PRIMARY.value,
+        "font_family": Font.BODY.value,
+        "font_size": "0.92rem" if full_width else "0.88rem",
+        "font_weight": "600",
+        "letter_spacing": "0.01em",
+        "text_decoration": "none",
+        "white_space": "nowrap",
+        "padding": "0.65rem 0.9rem" if full_width else "0.45rem 0.9rem",
+        "border_radius": "10px" if full_width else "999px",
+        "transition": "all 0.2s ease",
+    }
+    if full_width:
+        style["width"] = "100%"
+        style["justify_content"] = "between"
+
     return rx.el.a(
         t(label_es, label_en),
         href=href,
+        on_click=mobile_menu_open.set_value(False) if full_width else None,
+        style=style,
+        _hover={
+            "color": Color.ACCENT.value,
+            "background": "rgba(100, 182, 146, 0.12)",
+        },
+    )
+
+
+def mobile_menu_button() -> rx.Component:
+    return rx.el.button(
+        rx.cond(
+            mobile_menu_open.value,
+            rx.icon("x", size=20, color=TextColor.PRIMARY.value),
+            rx.icon("menu", size=20, color=TextColor.PRIMARY.value),
+        ),
+        type="button",
+        aria_label="Toggle navigation menu",
+        on_click=mobile_menu_open.set_value(
+            rx.cond(mobile_menu_open.value, False, True)
+        ),
+        display=["inline-flex", "inline-flex", "inline-flex", "none"],
         style={
-            "display": "inline-flex",
             "align_items": "center",
-            "color": TextColor.PRIMARY.value,
-            "font_family": Font.BODY.value,
-            "font_size": "0.88rem",
-            "font_weight": "600",
-            "letter_spacing": "0.01em",
-            "text_decoration": "none",
-            "white_space": "nowrap",
-            "padding": "0.45rem 0.9rem",
-            "border_radius": "999px",
+            "justify_content": "center",
+            "width": "40px",
+            "height": "40px",
+            "border_radius": "10px",
+            "background": Color.SURFACE.value,
+            "border": f"1px solid {Color.BORDER.value}",
+            "cursor": "pointer",
             "transition": "all 0.2s ease",
         },
         _hover={
-            "color": Color.ACCENT.value,
+            "border_color": Color.ACCENT.value,
             "background": "rgba(100, 182, 146, 0.12)",
         },
     )
@@ -65,6 +104,7 @@ def navbar() -> rx.Component:
                         align="center",
                     ),
                     href="#about",
+                    on_click=mobile_menu_open.set_value(False),
                     style={
                         "display": "inline-flex",
                         "align_items": "center",
@@ -81,9 +121,13 @@ def navbar() -> rx.Component:
                     align="center",
                     display=["none", "none", "none", "flex"],
                 ),
-                # Right Control: Language Toggle only (CV button removed from navbar)
+                # Right Control: Language Toggle (Desktop) & Hamburger Button (Mobile/Tablet)
                 rx.hstack(
-                    language_switch(),
+                    rx.box(
+                        language_switch(),
+                        display=["none", "none", "none", "flex"],
+                    ),
+                    mobile_menu_button(),
                     align="center",
                 ),
                 justify="between",
@@ -94,21 +138,39 @@ def navbar() -> rx.Component:
                 padding_x=["1.25rem", "2rem", "3rem"],
                 padding_y="0.9rem",
             ),
-            # Mobile / Tablet Secondary Section Bar
-            rx.hstack(
-                *[
-                    nav_anchor_item(href, es, en)
-                    for href, es, en in NAV_SECTIONS
-                ],
-                spacing="2",
-                align="center",
-                display=["flex", "flex", "flex", "none"],
-                overflow_x="auto",
-                width="100%",
-                padding_x="1rem",
-                padding_y="0.5rem",
-                justify="center",
-                border_top=f"1px solid {Color.BORDER.value}",
+            # Mobile / Tablet Collapsible Dropdown Menu
+            rx.cond(
+                mobile_menu_open.value,
+                rx.vstack(
+                    *[
+                        nav_anchor_item(href, es, en, full_width=True)
+                        for href, es, en in NAV_SECTIONS
+                    ],
+                    rx.hstack(
+                        rx.text(
+                            t("Idioma", "Language"),
+                            font_family=Font.BODY.value,
+                            font_size="0.88rem",
+                            font_weight="600",
+                            color=TextColor.MUTED.value,
+                        ),
+                        language_switch(),
+                        justify="between",
+                        align="center",
+                        width="100%",
+                        padding_top="0.65rem",
+                        margin_top="0.25rem",
+                        border_top=f"1px solid {Color.BORDER.value}",
+                    ),
+                    spacing="1",
+                    align="start",
+                    display=["flex", "flex", "flex", "none"],
+                    width="100%",
+                    padding_x="1.25rem",
+                    padding_top="0.5rem",
+                    padding_bottom="1rem",
+                    border_top=f"1px solid {Color.BORDER.value}",
+                ),
             ),
             width="100%",
             background="rgba(26, 26, 26, 0.95)",

@@ -16,8 +16,6 @@ LINKEDIN_URL = "https://www.linkedin.com/in/morabdiego/"
 GMAIL_ADDRESS = "morabdiego@gmail.com"
 GMAIL_URL = f"mailto:{GMAIL_ADDRESS}"
 INSTAGRAM_URL = "https://www.instagram.com/morabdiego/"
-CV_DRIVE_ES_URL = "https://drive.google.com/file/d/1h1djoliw5Gp4R2rFO0Ex4H8-WqHjdst-/view?usp=sharing"
-CV_DRIVE_EN_URL = "https://drive.google.com/file/d/1lwOTeUCNgI_H3bU7rwT6sjUkp0IwfIqo/view?usp=sharing"
 CV_PDF_ES_PATH = "/content/CV-ES.pdf"
 CV_PDF_EN_PATH = "/content/CV-EN.pdf"
 
@@ -50,4 +48,3 @@ SOCIAL_LINKS = [
 # Layout dimensions
 MAX_WIDTH = "1120px"
 FULL_WIDTH = "100%"
-

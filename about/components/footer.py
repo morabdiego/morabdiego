@@ -71,7 +71,7 @@ def footer() -> rx.Component:
                         ),
                         rx.heading(
                             t(
-                                "¿Hablamos?",
+                                "Contacta conmigo",
                                 "Let’s talk.",
                             ),
                             as_="h2",
@@ -172,7 +172,6 @@ def footer() -> rx.Component:
                         font_weight="500",
                     ),
                     rx.hstack(
-                        # footer_social_link("LinkedIn", LINKEDIN_URL),
                         footer_social_link("GitHub", GITHUB_URL),
                         footer_social_link("Instagram", INSTAGRAM_URL),
                         spacing="4",

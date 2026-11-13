@@ -8,7 +8,7 @@ from about.components.cv_sections import (
     publications_section,
 )
 from about.components.footer import footer
-from about.state import is_spanish
+from about.state import is_spanish, mobile_menu_open
 
 
 @rx.page(
@@ -19,6 +19,7 @@ from about.state import is_spanish
 def index() -> rx.Component:
     return rx.box(
         is_spanish,
+        mobile_menu_open,
         navbar(),
         rx.el.main(
             hero(),
