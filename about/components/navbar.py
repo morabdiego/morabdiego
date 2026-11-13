@@ -87,7 +87,7 @@ def navbar() -> rx.Component:
                         rx.text(
                             "Diego Mora",
                             font_family=Font.HEADING.value,
-                            font_weight="800",
+                            font_weight="700",
                             font_size=["1.05rem", "1.2rem"],
                             color=TextColor.PRIMARY.value,
                             letter_spacing="-0.02em",
@@ -173,9 +173,9 @@ def navbar() -> rx.Component:
                 ),
             ),
             width="100%",
-            background="rgba(26, 26, 26, 0.95)",
+            background="rgba(26, 26, 26, 0.94)",
             backdrop_filter="blur(14px)",
-            border_bottom=f"3px solid {Color.ACCENT.value}",
+            border_bottom=f"2px solid {Color.ACCENT.value}",
         ),
         style={
             "position": "sticky",

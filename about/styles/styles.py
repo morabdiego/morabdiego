@@ -38,17 +38,17 @@ class AltColor(Enum):
 class AltTextColor(Enum):
     """Text colors for light theme"""
     PRIMARY = "#1e1e1e"
-    MUTED = "#545249"
-    SECONDARY = "#2b7a58"
+    MUTED = "#4a483f"
+    SECONDARY = "#246a4c"
     ACCENT = "#64b692"
-    UNEXPECTED = "#9b4d4d"
+    UNEXPECTED = "#8f4040"
 
 
 class Font(Enum):
-    """Unified Montserrat typography across the entire site"""
-    HEADING = "'Montserrat', sans-serif"
+    """Editorial pairing: Bitter for headings & display, Montserrat for body, JetBrains Mono for code"""
+    HEADING = "'Bitter', Georgia, serif"
     BODY = "'Montserrat', sans-serif"
-    MONO = "'Montserrat', sans-serif"
+    MONO = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
 
 
 class Size(Enum):
@@ -63,7 +63,7 @@ class Size(Enum):
 
 
 STYLESHEETS = [
-    "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..700&display=swap"
+    "https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500..800;1,500..700&family=JetBrains+Mono:wght@500;600&family=Montserrat:ital,wght@0,400..700;1,400..600&display=swap"
 ]
 
 GLOBAL_STYLE = {
@@ -77,7 +77,7 @@ GLOBAL_STYLE = {
         "--code-font-family": Font.MONO.value,
         "--strong-font-family": Font.BODY.value,
         "--em-font-family": Font.BODY.value,
-        "--quote-font-family": Font.BODY.value,
+        "--quote-font-family": Font.HEADING.value,
         "font_family": Font.BODY.value,
     },
     "body": {
@@ -89,21 +89,32 @@ GLOBAL_STYLE = {
         "overflow_x": "hidden",
         "-webkit-font-smoothing": "antialiased",
     },
-    "h1, h2, h3, h4, h5, h6, p, span, a, button, li": {
+    "::selection": {
+        "background": AltColor.ACCENT_SOFT.value,
+        "color": AltTextColor.PRIMARY.value,
+    },
+    "a:focus-visible, button:focus-visible": {
+        "outline": f"2px solid {Color.ACCENT.value}",
+        "outline_offset": "3px",
+    },
+    "p, span, a, button, li": {
         "font_family": Font.BODY.value,
+    },
+    "h1, h2, h3, h4, h5, h6": {
+        "font_family": Font.HEADING.value,
     },
 }
 
 CARD_STYLE = {
     "background": AltColor.CARD_BG.value,
-    "border": f"1px solid {AltColor.BORDER.value}",
-    "border_radius": "18px",
-    "padding": ["1.5rem", "1.75rem", "2.25rem"],
-    "box_shadow": "0 8px 24px -4px rgba(30, 30, 30, 0.05), 0 2px 6px -1px rgba(30, 30, 30, 0.03)",
-    "transition": "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+    "border": f"1px solid {AltColor.BORDER_STRONG.value}",
+    "border_radius": "12px",
+    "padding": ["1.35rem", "1.65rem", "2rem"],
+    "box_shadow": "0 1px 3px rgba(30, 30, 30, 0.04)",
+    "transition": "border-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease",
     "_hover": {
-        "transform": "translateY(-3px)",
-        "box_shadow": "0 16px 32px -6px rgba(30, 30, 30, 0.09), 0 4px 10px -2px rgba(30, 30, 30, 0.04)",
+        "transform": "translateY(-2px)",
+        "box_shadow": "0 10px 24px -8px rgba(30, 30, 30, 0.08)",
         "border_color": Color.ACCENT.value,
     },
 }

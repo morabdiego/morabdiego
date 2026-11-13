@@ -80,12 +80,12 @@ def profile_card() -> rx.Component:
             rx.image(
                 src=asset_url("/profile.jpg"),
                 alt=PROFILE["name"],
-                width=["180px", "210px", "230px"],
-                height=["180px", "210px", "230px"],
+                width=["170px", "200px", "220px"],
+                height=["170px", "200px", "220px"],
                 border_radius="50%",
                 object_fit="cover",
-                border=f"5px solid {AltColor.CARD_BG.value}",
-                box_shadow=f"0 0 0 3px {Color.ACCENT.value}, 0 20px 40px rgba(30, 30, 30, 0.16)",
+                border=f"4px solid {AltColor.CARD_BG.value}",
+                box_shadow=f"0 0 0 2px {Color.ACCENT.value}, 0 12px 28px -8px rgba(30, 30, 30, 0.16)",
             ),
             position="relative",
         ),
@@ -122,11 +122,6 @@ def profile_card() -> rx.Component:
 
 
 def highlight_card(item: dict) -> rx.Component:
-    card_css = {
-        **CARD_STYLE,
-        "border_top": f"4px solid {Color.ACCENT.value}",
-        "padding": ["1.35rem", "1.6rem"],
-    }
     metric_text = (
         t(item["metric"], item["metric_en"])
         if "metric_en" in item
@@ -137,32 +132,36 @@ def highlight_card(item: dict) -> rx.Component:
             rx.text(
                 metric_text,
                 font_family=Font.HEADING.value,
-                font_size=["1.65rem", "1.9rem"],
-                font_weight="800",
+                font_size=["1.65rem", "1.95rem"],
+                font_weight="700",
                 color=AltTextColor.UNEXPECTED.value,
                 line_height="1.1",
-                letter_spacing="-0.03em",
+                letter_spacing="-0.025em",
+                style={"fontVariantNumeric": "tabular-nums"},
             ),
             rx.text(
                 t(item["label_es"], item["label_en"]),
                 font_family=Font.BODY.value,
                 font_weight="700",
-                font_size="0.95rem",
+                font_size="0.92rem",
                 color=AltTextColor.PRIMARY.value,
-                margin_top="0.2rem",
+                margin_top="0.25rem",
             ),
             rx.text(
                 t(item["detail_es"], item["detail_en"]),
                 font_family=Font.BODY.value,
-                font_size="0.84rem",
+                font_size="0.83rem",
                 font_weight="500",
                 color=AltTextColor.MUTED.value,
-                line_height="1.5",
+                line_height="1.55",
             ),
             align="start",
             spacing="1",
         ),
-        style=card_css,
+        style={
+            "padding": "1.25rem 0 0.25rem 0",
+            "border_top": f"2px solid {Color.ACCENT.value}",
+        },
         width="100%",
     )
 
@@ -178,29 +177,25 @@ def header() -> rx.Component:
         rx.flex(
             profile_card(),
             rx.vstack(
-                # Role Pill
+                # Editorial Role Eyebrow
                 rx.hstack(
                     rx.box(
-                        width="8px",
-                        height="8px",
-                        border_radius="50%",
+                        width="18px",
+                        height="2px",
                         background=AltTextColor.UNEXPECTED.value,
+                        flex_shrink="0",
                     ),
                     rx.text(
                         t(PROFILE["role_es"], PROFILE["role_en"]),
                         font_family=Font.BODY.value,
-                        font_size="0.76rem",
+                        font_size="0.75rem",
                         font_weight="700",
                         text_transform="uppercase",
-                        letter_spacing="0.08em",
+                        letter_spacing="0.11em",
                         color=AltTextColor.UNEXPECTED.value,
                     ),
                     spacing="2",
                     align="center",
-                    padding="0.4rem 0.95rem",
-                    border_radius="999px",
-                    background=AltColor.HIGHLIGHT_SOFT.value,
-                    border="1px solid rgba(155, 77, 77, 0.22)",
                 ),
                 # Name & Tagline
                 rx.vstack(
@@ -208,17 +203,18 @@ def header() -> rx.Component:
                         PROFILE["name"],
                         as_="h1",
                         font_family=Font.HEADING.value,
-                        font_size=["2.1rem", "2.65rem", "3.1rem"],
+                        font_size=["2.15rem", "2.75rem", "3.2rem"],
                         font_weight="800",
                         color=AltTextColor.PRIMARY.value,
-                        line_height="1.12",
-                        letter_spacing="-0.03em",
+                        line_height="1.1",
+                        letter_spacing="-0.025em",
                     ),
                     rx.text(
                         t(PROFILE["tagline_es"], PROFILE["tagline_en"]),
-                        font_family=Font.BODY.value,
-                        font_size=["1rem", "1.12rem"],
-                        font_weight="600",
+                        font_family=Font.HEADING.value,
+                        font_style="italic",
+                        font_size=["1.02rem", "1.14rem"],
+                        font_weight="500",
                         color=AltTextColor.SECONDARY.value,
                         line_height="1.45",
                     ),
@@ -226,29 +222,31 @@ def header() -> rx.Component:
                     align="start",
                     width="100%",
                 ),
-                # Bio Paragraphs
+                # Bio Paragraphs (optimal 65ch reading measure)
                 rx.vstack(
                     rx.text(
                         t(PROFILE["bio_p1_es"], PROFILE["bio_p1_en"]),
                         font_family=Font.BODY.value,
-                        font_size="0.98rem",
+                        font_size="0.96rem",
                         font_weight="500",
                         color=AltTextColor.PRIMARY.value,
                         line_height="1.75",
+                        max_width="65ch",
                     ),
                     rx.text(
                         t(PROFILE["bio_p2_es"], PROFILE["bio_p2_en"]),
                         font_family=Font.BODY.value,
-                        font_size="0.96rem",
+                        font_size="0.94rem",
                         font_weight="400",
                         color=AltTextColor.MUTED.value,
                         line_height="1.75",
+                        max_width="65ch",
                     ),
                     spacing="3",
                     align="start",
                     width="100%",
                 ),
-                # Action CTA Buttons (well-separated with inline-flex + explicit gap)
+                # Action CTA Buttons
                 rx.flex(
                     rx.el.a(
                         rx.hstack(
@@ -257,7 +255,7 @@ def header() -> rx.Component:
                                 t("Descargar CV (PDF)", "Download CV (PDF)"),
                                 font_family=Font.BODY.value,
                                 font_weight="700",
-                                font_size="0.88rem",
+                                font_size="0.86rem",
                             ),
                             spacing="2",
                             align="center",
@@ -271,18 +269,17 @@ def header() -> rx.Component:
                             "justify_content": "center",
                             "background": Color.BACKGROUND.value,
                             "color": Color.PRIMARY.value,
-                            "padding": "0.8rem 1.45rem",
-                            "border_radius": "12px",
+                            "padding": "0.75rem 1.35rem",
+                            "border_radius": "10px",
                             "text_decoration": "none",
-                            "border": f"2px solid {Color.BACKGROUND.value}",
-                            "box_shadow": "0 4px 14px rgba(30, 30, 30, 0.14)",
+                            "border": f"1.5px solid {Color.BACKGROUND.value}",
                             "transition": "all 0.2s ease",
                         },
                         _hover={
                             "background": Color.ACCENT.value,
                             "color": Color.BACKGROUND_DEEP.value,
                             "border_color": Color.ACCENT.value,
-                            "transform": "translateY(-2px)",
+                            "transform": "translateY(-1px)",
                         },
                     ),
                     rx.el.a(
@@ -292,7 +289,7 @@ def header() -> rx.Component:
                                 t("Ver experiencia", "View Experience & CV"),
                                 font_family=Font.BODY.value,
                                 font_weight="700",
-                                font_size="0.88rem",
+                                font_size="0.86rem",
                             ),
                             spacing="2",
                             align="center",
@@ -304,17 +301,16 @@ def header() -> rx.Component:
                             "justify_content": "center",
                             "background": AltColor.CARD_BG.value,
                             "color": AltTextColor.PRIMARY.value,
-                            "padding": "0.8rem 1.45rem",
-                            "border_radius": "12px",
+                            "padding": "0.75rem 1.35rem",
+                            "border_radius": "10px",
                             "text_decoration": "none",
-                            "border": f"1.5px solid {AltColor.BORDER_STRONG.value}",
-                            "box_shadow": "0 2px 8px rgba(30, 30, 30, 0.04)",
+                            "border": f"1px solid {AltColor.BORDER_STRONG.value}",
                             "transition": "all 0.2s ease",
                         },
                         _hover={
                             "border_color": Color.ACCENT.value,
                             "background": "#ffffff",
-                            "transform": "translateY(-2px)",
+                            "transform": "translateY(-1px)",
                         },
                     ),
                     rx.el.a(
@@ -324,7 +320,7 @@ def header() -> rx.Component:
                                 t("Contactar", "Contact Me"),
                                 font_family=Font.BODY.value,
                                 font_weight="700",
-                                font_size="0.88rem",
+                                font_size="0.86rem",
                             ),
                             spacing="2",
                             align="center",
@@ -336,16 +332,16 @@ def header() -> rx.Component:
                             "justify_content": "center",
                             "background": AltColor.ACCENT_SOFT.value,
                             "color": AltTextColor.SECONDARY.value,
-                            "padding": "0.8rem 1.35rem",
-                            "border_radius": "12px",
+                            "padding": "0.75rem 1.25rem",
+                            "border_radius": "10px",
                             "text_decoration": "none",
-                            "border": "1.5px solid rgba(100, 182, 146, 0.35)",
+                            "border": "1px solid rgba(36, 106, 76, 0.28)",
                             "transition": "all 0.2s ease",
                         },
                         _hover={
                             "background": Color.ACCENT.value,
                             "color": Color.BACKGROUND_DEEP.value,
-                            "transform": "translateY(-2px)",
+                            "transform": "translateY(-1px)",
                         },
                     ),
                     spacing="4",

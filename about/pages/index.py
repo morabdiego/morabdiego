@@ -8,7 +8,13 @@ from about.components.cv_sections import (
     publications_section,
 )
 from about.components.footer import footer
-from about.state import is_spanish, mobile_menu_open
+from about.state import (
+    is_spanish,
+    mobile_menu_open,
+    show_all_experience,
+    show_all_training,
+    show_all_publications,
+)
 
 
 @rx.page(
@@ -20,6 +26,9 @@ def index() -> rx.Component:
     return rx.box(
         is_spanish,
         mobile_menu_open,
+        show_all_experience,
+        show_all_training,
+        show_all_publications,
         navbar(),
         rx.el.main(
             hero(),
