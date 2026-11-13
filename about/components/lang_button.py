@@ -12,6 +12,8 @@ def language_switch() -> rx.Component:
             on_click=is_spanish.set_value(True),
             style={
                 "padding": "0.35rem 0.75rem",
+                "min_width": "42px",
+                "text_align": "center",
                 "border_radius": "999px",
                 "font_family": Font.BODY.value,
                 "font_size": "0.78rem",
@@ -36,6 +38,8 @@ def language_switch() -> rx.Component:
             on_click=is_spanish.set_value(False),
             style={
                 "padding": "0.35rem 0.75rem",
+                "min_width": "42px",
+                "text_align": "center",
                 "border_radius": "999px",
                 "font_family": Font.BODY.value,
                 "font_size": "0.78rem",

@@ -287,6 +287,8 @@ def experience_card(item: dict) -> rx.Component:
                     ),
                     spacing="3",
                     align="start",
+                    flex="1",
+                    min_width="0",
                     style={"gap": "1rem"},
                 ),
                 rx.hstack(
@@ -297,6 +299,7 @@ def experience_card(item: dict) -> rx.Component:
                         font_size="0.78rem",
                         font_weight="600",
                         color=AltTextColor.MUTED.value,
+                        white_space="nowrap",
                     ),
                     spacing="2",
                     align="center",
@@ -479,6 +482,8 @@ def education_degree_card(item: dict) -> rx.Component:
                     ),
                     spacing="3",
                     align="start",
+                    flex="1",
+                    min_width="0",
                     style={"gap": "1rem"},
                 ),
                 rx.hstack(
@@ -489,6 +494,7 @@ def education_degree_card(item: dict) -> rx.Component:
                         font_size="0.78rem",
                         font_weight="600",
                         color=AltTextColor.MUTED.value,
+                        white_space="nowrap",
                     ),
                     spacing="2",
                     align="center",
@@ -568,6 +574,7 @@ def training_card(item: dict) -> rx.Component:
                 font_weight="400",
                 color=AltTextColor.MUTED.value,
                 line_height="1.65",
+                flex="1",
             ),
             rx.flex(
                 *[tag_pill(es, en, "green") for es, en in tags],
@@ -1041,6 +1048,8 @@ def publication_list_row(item: dict) -> rx.Component:
                 spacing="2",
                 align="start",
                 width="100%",
+                flex="1",
+                min_width="0",
             ),
             direction=rx.breakpoints(initial="column", md="row"),
             align="start",
@@ -1144,6 +1153,7 @@ def pypi_package_card(item: dict) -> rx.Component:
                 font_weight="400",
                 color=AltTextColor.MUTED.value,
                 line_height="1.62",
+                flex="1",
             ),
             rx.flex(
                 *[

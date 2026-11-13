@@ -5,32 +5,27 @@ from about.components.lang_button import language_switch
 from about.state import t, mobile_menu_open
 
 
-def nav_anchor_item(
-    href: str, label_es: str, label_en: str, *, full_width: bool = False
-) -> rx.Component:
-    style = {
-        "display": "inline-flex",
-        "align_items": "center",
-        "color": TextColor.PRIMARY.value,
-        "font_family": Font.BODY.value,
-        "font_size": "0.92rem" if full_width else "0.88rem",
-        "font_weight": "600",
-        "letter_spacing": "0.01em",
-        "text_decoration": "none",
-        "white_space": "nowrap",
-        "padding": "0.65rem 0.9rem" if full_width else "0.45rem 0.9rem",
-        "border_radius": "10px" if full_width else "999px",
-        "transition": "all 0.2s ease",
-    }
-    if full_width:
-        style["width"] = "100%"
-        style["justify_content"] = "between"
-
+def nav_anchor_item(href: str, label_es: str, label_en: str) -> rx.Component:
     return rx.el.a(
         t(label_es, label_en),
         href=href,
-        on_click=mobile_menu_open.set_value(False) if full_width else None,
-        style=style,
+        on_click=mobile_menu_open.set_value(False),
+        style={
+            "display": "inline-flex",
+            "align_items": "center",
+            "justify_content": "between",
+            "width": "100%",
+            "color": TextColor.PRIMARY.value,
+            "font_family": Font.BODY.value,
+            "font_size": "0.92rem",
+            "font_weight": "600",
+            "letter_spacing": "0.01em",
+            "text_decoration": "none",
+            "white_space": "nowrap",
+            "padding": "0.65rem 0.9rem",
+            "border_radius": "10px",
+            "transition": "all 0.2s ease",
+        },
         _hover={
             "color": Color.ACCENT.value,
             "background": "rgba(100, 182, 146, 0.12)",
@@ -38,7 +33,7 @@ def nav_anchor_item(
     )
 
 
-def mobile_menu_button() -> rx.Component:
+def menu_toggle_button() -> rx.Component:
     return rx.el.button(
         rx.cond(
             mobile_menu_open.value,
@@ -50,21 +45,21 @@ def mobile_menu_button() -> rx.Component:
         on_click=mobile_menu_open.set_value(
             rx.cond(mobile_menu_open.value, False, True)
         ),
-        display=["inline-flex", "inline-flex", "inline-flex", "none"],
         style={
+            "display": "inline-flex",
             "align_items": "center",
             "justify_content": "center",
             "width": "40px",
             "height": "40px",
             "border_radius": "10px",
-            "background": Color.SURFACE.value,
-            "border": f"1px solid {Color.BORDER.value}",
+            "background": "rgba(255, 255, 255, 0.08)",
+            "border": "1px solid rgba(240, 238, 220, 0.18)",
             "cursor": "pointer",
             "transition": "all 0.2s ease",
         },
         _hover={
             "border_color": Color.ACCENT.value,
-            "background": "rgba(100, 182, 146, 0.12)",
+            "background": "rgba(100, 182, 146, 0.18)",
         },
     )
 
@@ -111,25 +106,8 @@ def navbar() -> rx.Component:
                         "text_decoration": "none",
                     },
                 ),
-                # Desktop Navigation Links
-                rx.hstack(
-                    *[
-                        nav_anchor_item(href, es, en)
-                        for href, es, en in NAV_SECTIONS
-                    ],
-                    spacing="2",
-                    align="center",
-                    display=["none", "none", "none", "flex"],
-                ),
-                # Right Control: Language Toggle (Desktop) & Hamburger Button (Mobile/Tablet)
-                rx.hstack(
-                    rx.box(
-                        language_switch(),
-                        display=["none", "none", "none", "flex"],
-                    ),
-                    mobile_menu_button(),
-                    align="center",
-                ),
+                # Right Control: Always-visible Menu Toggle Button
+                menu_toggle_button(),
                 justify="between",
                 align="center",
                 width="100%",
@@ -138,44 +116,52 @@ def navbar() -> rx.Component:
                 padding_x=["1.25rem", "2rem", "3rem"],
                 padding_y="0.9rem",
             ),
-            # Mobile / Tablet Collapsible Dropdown Menu
+            # Collapsible Dropdown Menu (all screen sizes)
             rx.cond(
                 mobile_menu_open.value,
-                rx.vstack(
-                    *[
-                        nav_anchor_item(href, es, en, full_width=True)
-                        for href, es, en in NAV_SECTIONS
-                    ],
-                    rx.hstack(
-                        rx.text(
-                            t("Idioma", "Language"),
-                            font_family=Font.BODY.value,
-                            font_size="0.88rem",
-                            font_weight="600",
-                            color=TextColor.MUTED.value,
+                rx.box(
+                    rx.vstack(
+                        *[
+                            nav_anchor_item(href, es, en)
+                            for href, es, en in NAV_SECTIONS
+                        ],
+                        rx.hstack(
+                            rx.text(
+                                t("Idioma", "Language"),
+                                font_family=Font.BODY.value,
+                                font_size="0.88rem",
+                                font_weight="600",
+                                color=TextColor.MUTED.value,
+                            ),
+                            language_switch(),
+                            justify="between",
+                            align="center",
+                            width="100%",
+                            padding_top="0.65rem",
+                            margin_top="0.25rem",
+                            border_top=f"1px solid {Color.BORDER.value}",
                         ),
-                        language_switch(),
-                        justify="between",
-                        align="center",
+                        spacing="1",
+                        align="start",
                         width="100%",
-                        padding_top="0.65rem",
-                        margin_top="0.25rem",
-                        border_top=f"1px solid {Color.BORDER.value}",
+                        max_width=MAX_WIDTH,
+                        margin_x="auto",
+                        padding_x=["1.25rem", "2rem", "3rem"],
+                        padding_top="0.5rem",
+                        padding_bottom="1rem",
                     ),
-                    spacing="1",
-                    align="start",
-                    display=["flex", "flex", "flex", "none"],
                     width="100%",
-                    padding_x="1.25rem",
-                    padding_top="0.5rem",
-                    padding_bottom="1rem",
                     border_top=f"1px solid {Color.BORDER.value}",
                 ),
             ),
             width="100%",
-            background="rgba(26, 26, 26, 0.94)",
-            backdrop_filter="blur(14px)",
-            border_bottom=f"2px solid {Color.ACCENT.value}",
+            style={
+                "background": "rgba(24, 24, 24, 0.66)",
+                "backdrop_filter": "blur(20px) saturate(160%)",
+                "-webkit-backdrop-filter": "blur(20px) saturate(160%)",
+                "border_bottom": "1px solid rgba(100, 182, 146, 0.45)",
+                "box_shadow": "inset 0 -1px 0 rgba(255, 255, 255, 0.08), 0 8px 32px rgba(20, 20, 20, 0.14)",
+            },
         ),
         style={
             "position": "sticky",
